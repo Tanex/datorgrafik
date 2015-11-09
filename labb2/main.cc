@@ -1,4 +1,4 @@
-/* lab-1.1
+/* lab-2.1
    Copyright (C) 2011 Mathias Broxvall
 
    This program is free software; you can redistribute it and/or modify
@@ -52,6 +52,7 @@ public:
   /** Handles keyboard input */
   void doKeyboard(int,int,int);
 private:
+  double time;
 };
 
 /* Important global variables */
@@ -88,6 +89,7 @@ void Resources::reload() {
 }
 
 World::World() {
+  time=0.0;
 }
 
 void World::doRedraw(Resources *r) {
@@ -104,29 +106,35 @@ void World::doRedraw(Resources *r) {
   
   /* Specify four vertices, each consisting of four XYZW points. */
   float sw=screenWidth, sh=screenHeight;   
-  GLfloat vertices[4][4] = {{-1.0, -1.0, 0.0, 1.0},
-			    {1.0 , -1.0, 0.0, 1.0}, 
-			    {1.0 , +1.0 , 0.0, 1.0},
-			    {-1.0, +1.0 , 0.0, 1.0}};
-  /* Give colours for each such vertice */
-  GLfloat colours[4][3] = {{0.5, 0.5, 0.0}, 
-			   {0.5, 0.5, 0.0},
-			   {0.5, 0.5, 0.0},
-			   {0.5, 0.5, 0.0}};
+  GLfloat vertices[4][4] = {{-1.0, -1.0, -1.0, 1.0},
+			    {1.0 , -1.0, +1.0, 1.0}, 
+			    {1.0 , +1.0 , +1.0, 1.0},
+			    {-1.0, +1.0 , -1.0, 1.0}};
+
+  GLfloat colour[4][4] = {
+    {1.0, 0.0, 0.0, 0.0},
+    {1.0, 0.0, 0.0, 0.0},    
+    {1.0, 0.0, 0.0, 0.0},
+    {1.0, 0.0, 0.0, 0.0}};
+
+  GLfloat phase[8] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
   /* This is a list of graphic primitives (as triangles), that reference the above vertices */
-  GLuint indices[2][3] = {{0,1,2},{2,3,0}};
+  GLuint indices[2][4] = {{0,1,2,3},{4,5,6,7}};
 
   glUseProgram(r->shaderProgram);
 
   /* Attrib, N-Elements, Type, Normalize, Stride, Pointer */
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) &vertices);  
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) vertices);  
   glEnableVertexAttribArray(0);
 
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*) &colours);
+  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*) colour);
   glEnableVertexAttribArray(1);
 
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
+
   /* (a) This draws the two triangles given by vertex 0,1,2 and 2,3,0 */
-  glDrawElements(GL_TRIANGLES, 2*3, GL_UNSIGNED_INT, &indices[0][0]);
+  glDrawElements(GL_QUADS, 1*4, GL_UNSIGNED_INT, &indices[0][0]);
   /* (b) This alternative draws the four vertices directly as a rectangle on the screen     
      glDrawArrays(GL_QUADS, 0, 4);
   */
@@ -143,7 +151,7 @@ void World::doKeyboard(int key,int mouseX,int mouseY) {
   }
 }
 
-void World::tick(double deltaTime) { }
+void World::tick(double deltaTime) { time += deltaTime; }
 
 
 /** Main function, initializing the program and performing the draw/event/tick loop */
@@ -219,7 +227,6 @@ int main(int argc,char **args) {
       }
   }
   SDL_Quit();
-  return -1;
 }
 
 #ifdef WINDOWS

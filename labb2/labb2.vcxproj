@@ -26,6 +26,10 @@
     <ClCompile Include="glUtil.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Release\fragmentShader.fs" />
+    <None Include="x64\Release\vertexShader.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{62E5449B-95BD-4B8E-8EC5-8780DE45417D}</ProjectGuid>
     <RootNamespace>labb1</RootNamespace>
@@ -76,7 +80,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

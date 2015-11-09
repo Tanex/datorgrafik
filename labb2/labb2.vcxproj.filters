@@ -30,4 +30,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Release\fragmentShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="x64\Release\vertexShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

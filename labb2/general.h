@@ -15,7 +15,7 @@
 #endif
 
 /* OpenGL includes */
-#include "GL/glew.h"
+#include <GL/glew.h>
 
 /* SDL related includes */
 #include "SDL.h"
