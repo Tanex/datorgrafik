@@ -18,6 +18,7 @@
 
 #include "general.h"
 #include "glUtil.h"
+#include "glm.hpp"
 
 /** Container for all OpenGL related resources such as textures and shaders that are used in the labs */
 class Resources {
@@ -103,25 +104,105 @@ void World::doRedraw(Resources *r) {
 
   glClearColor(0.0,0.0,0.0,0.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  GLfloat n = 1, f = 10;
+  GLfloat a = (f + n) / (f - n);
+  GLfloat b = 2 * f*n / (f - n);
+
+  // projectionMatrix
+  GLfloat projectionMatrix[4][4] = {
+	  { 1.0, 0.0, 0.0, 0.0 },
+	  { 0.0, 1.0, 0.0, 0.0 },
+	  { 0.0, 0.0,  -a,  -b },
+	  { 0.0, 0.0,  -1, 0.0 } };
+
+  GLfloat alpha = time;
+  // modelviewMatrix
+  GLfloat modelviewMatrix[4][4] = {
+	  { cos(alpha),		0.0,	sin(alpha),		0.0 },
+	  { 0.0,			1.0,	0.0,			0.0 },
+	  { -sin(alpha),	0.0,	cos(alpha),		0.0 },
+	  { 0.0,			0.0,	-4.0,			1.0 } };
   
   /* Specify four vertices, each consisting of four XYZW points. */
   float sw=screenWidth, sh=screenHeight;   
-  GLfloat vertices[4][4] = {{-1.0, -1.0, -1.0, 1.0},
-			    {1.0 , -1.0, +1.0, 1.0}, 
-			    {1.0 , +1.0 , +1.0, 1.0},
-			    {-1.0, +1.0 , -1.0, 1.0}};
 
-  GLfloat colour[4][4] = {
-    {1.0, 0.0, 0.0, 0.0},
-    {1.0, 0.0, 0.0, 0.0},    
-    {1.0, 0.0, 0.0, 0.0},
-    {1.0, 0.0, 0.0, 0.0}};
+  /*GLfloat vertices[4][4] = {
+	  { -1.0, -1.0, -1.0, 1.0 },
+	  { 1.0 , -1.0, +1.0, 1.0 },
+	  { 1.0 , +1.0 , +1.0, 1.0 },
+	  { -1.0, +1.0 , -1.0, 1.0 } };*/
+
+  GLfloat vertices[24][4] = {
+	  { -1.0, -1.0, -1.0, 1.0 },
+	  { -1.0, +1.0, -1.0, 1.0 }, 
+	  { +1.0, +1.0, -1.0, 1.0 },
+	  { +1.0, -1.0, -1.0, 1.0 },
+
+	  { -1.0, -1.0, +1.0, 1.0 },
+	  { -1.0, +1.0, +1.0, 1.0 },
+	  { +1.0, +1.0, +1.0, 1.0 },
+	  { +1.0, -1.0, +1.0, 1.0 },
+
+	  { -1.0, -1.0, -1.0, 1.0 },
+	  { -1.0, -1.0, +1.0, 1.0 },
+	  { -1.0, +1.0, +1.0, 1.0 },
+	  { -1.0, +1.0, -1.0, 1.0 },
+
+	  { +1.0, -1.0, -1.0, 1.0 },
+	  { +1.0, -1.0, +1.0, 1.0 },
+	  { +1.0, +1.0, +1.0, 1.0 },
+	  { +1.0, +1.0, -1.0, 1.0 },
+
+	  { -1.0, -1.0, -1.0, 1.0 },
+	  { -1.0, -1.0, +1.0, 1.0 },
+	  { +1.0, -1.0, +1.0, 1.0 },
+	  { +1.0, -1.0, -1.0, 1.0 },
+
+	  { -1.0, +1.0, -1.0, 1.0 },
+	  { -1.0, +1.0, +1.0, 1.0 },
+	  { +1.0, +1.0, +1.0, 1.0 },
+	  { +1.0, +1.0, -1.0, 1.0 } };
+
+  GLfloat colour[24][4] = {
+    { 1.0, 0.0, 0.0, 0.0 },
+    { 1.0, 0.0, 0.0, 0.0 },    
+    { 1.0, 0.0, 0.0, 0.0 },
+    { 1.0, 0.0, 0.0, 0.0 },
+
+	{ 0.0, 1.0, 0.0, 0.0 },
+	{ 0.0, 1.0, 0.0, 0.0 },
+	{ 0.0, 1.0, 0.0, 0.0 },
+	{ 0.0, 1.0, 0.0, 0.0 },
+
+	{ 0.0, 0.0, 1.0, 0.0 },
+	{ 0.0, 0.0, 1.0, 0.0 },
+	{ 0.0, 0.0, 1.0, 0.0 },
+	{ 0.0, 0.0, 1.0, 0.0 },
+
+    { 1.0, 1.0, 0.0, 0.0 },
+    { 1.0, 1.0, 0.0, 0.0 },
+    { 1.0, 1.0, 0.0, 0.0 },
+    { 1.0, 1.0, 0.0, 0.0 },
+
+    { 1.0, 0.0, 1.0, 0.0 },
+    { 1.0, 0.0, 1.0, 0.0 },
+    { 1.0, 0.0, 1.0, 0.0 },
+    { 1.0, 0.0, 1.0, 0.0 },
+
+    { 0.0, 1.0, 1.0, 0.0 },
+    { 0.0, 1.0, 1.0, 0.0 },
+    { 0.0, 1.0, 1.0, 0.0 },
+    { 0.0, 1.0, 1.0, 0.0 } };
 
   GLfloat phase[8] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
   /* This is a list of graphic primitives (as triangles), that reference the above vertices */
-  GLuint indices[2][4] = {{0,1,2,3},{4,5,6,7}};
+  //GLuint indices[2][4] = {{0,1,2,3},{4,5,6,7}};
 
   glUseProgram(r->shaderProgram);
+
+  glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "projectionMatrix"), 1, GL_FALSE, &projectionMatrix[0][0]);
+  glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "modelviewMatrix"), 1, GL_FALSE, &modelviewMatrix[0][0]);
 
   /* Attrib, N-Elements, Type, Normalize, Stride, Pointer */
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) vertices);  
@@ -134,10 +215,10 @@ void World::doRedraw(Resources *r) {
   glDepthFunc(GL_LESS);
 
   /* (a) This draws the two triangles given by vertex 0,1,2 and 2,3,0 */
-  glDrawElements(GL_QUADS, 1*4, GL_UNSIGNED_INT, &indices[0][0]);
-  /* (b) This alternative draws the four vertices directly as a rectangle on the screen     
-     glDrawArrays(GL_QUADS, 0, 4);
-  */
+  //glDrawElements(GL_QUADS, 1*4, GL_UNSIGNED_INT, &indices[0][0]);
+  /* (b) This alternative draws the four vertices directly as a rectangle on the screen   */  
+  glDrawArrays(GL_QUADS, 0, 24);
+
 
 
   if((error=glGetError()) != GL_NO_ERROR) {
