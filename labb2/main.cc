@@ -19,6 +19,7 @@
 #include "general.h"
 #include "glUtil.h"
 #include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
 
 /** Container for all OpenGL related resources such as textures and shaders that are used in the labs */
 class Resources {
@@ -33,7 +34,7 @@ public:
      private variables with 'inlined' accessors (but not modifier)
      functions... but this is not a course about proper C++
      programming so we're gonna be lazy for now */
-  GLuint fragmentShader, vertexShader, shaderProgram;
+  GLuint fragmentShader, vertexShader, shaderProgram, diffuseTexture, specularTexture;
 
   /** Mark if the loaded shader code is "ok" or not - do not attempt to use any shaders or 
       draw anything if false. */
@@ -64,6 +65,11 @@ World *world;
 
 Resources::Resources() {
   /* Create shader and program objects, attach shaders to program */
+	GLuint textures[2];
+	glGenTextures(2, &textures[0]);
+	diffuseTexture = textures[0];
+	specularTexture = textures[1];
+
   vertexShader = glCreateShader(GL_VERTEX_SHADER);
   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
   shaderProgram = glCreateProgram();
@@ -86,6 +92,9 @@ void Resources::reload() {
   if(compileShader(vertexShader, "vertexShader.vs", "vertexShader.log")) return;
   /* Link all shader programs */
   if(linkProgram(shaderProgram,"program.log")) return;
+
+  if (loadTexture(diffuseTexture, "texture1.png", 1)) return;
+  if (loadTexture(specularTexture, "texture2.png", 1)) return;
   isOk=1;
 }
 
@@ -115,14 +124,25 @@ void World::doRedraw(Resources *r) {
 	  { 0.0, 1.0, 0.0, 0.0 },
 	  { 0.0, 0.0,  -a,  -b },
 	  { 0.0, 0.0,  -1, 0.0 } };
-
+ 
   GLfloat alpha = time;
   // modelviewMatrix
-  GLfloat modelviewMatrix[4][4] = {
+  /*GLfloat modelviewMatrix[4][4] = {
 	  { cos(alpha),		0.0,	sin(alpha),		0.0 },
 	  { 0.0,			1.0,	0.0,			0.0 },
 	  { -sin(alpha),	0.0,	cos(alpha),		0.0 },
-	  { 0.0,			0.0,	-4.0,			1.0 } };
+	  { 0.0,			0.0,	-4.0,			1.0 } };*/
+
+  /*glm::mat4 modelviewMatrix = {
+	  { cos(alpha),		0.0,	sin(alpha),		0.0 },
+	  { 0.0,			1.0,	0.0,			0.0 },
+	  { -sin(alpha),	0.0,	cos(alpha),		0.0 },
+	  { 0.0,			0.0,	-4.0,			1.0 } };*/
+
+  glm::mat4 modelviewMatrix = 
+	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -4)) * 
+	  glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0, 1, 0)) * 
+	  glm::rotate(glm::mat4(1.0f), 0.4f*(float)time, glm::vec3(1, 0, 0));
   
   /* Specify four vertices, each consisting of four XYZW points. */
   float sw=screenWidth, sh=screenHeight;   
@@ -165,10 +185,10 @@ void World::doRedraw(Resources *r) {
 	  { +1.0, +1.0, -1.0, 1.0 } };
 
   GLfloat colour[24][4] = {
-    { 1.0, 0.0, 0.0, 0.0 },
-    { 1.0, 0.0, 0.0, 0.0 },    
-    { 1.0, 0.0, 0.0, 0.0 },
-    { 1.0, 0.0, 0.0, 0.0 },
+	{ 1.0, 0.0, 0.0, 0.0 },
+	{ 1.0, 0.0, 0.0, 0.0 },    
+	{ 1.0, 0.0, 0.0, 0.0 },
+	{ 1.0, 0.0, 0.0, 0.0 },
 
 	{ 0.0, 1.0, 0.0, 0.0 },
 	{ 0.0, 1.0, 0.0, 0.0 },
@@ -180,22 +200,89 @@ void World::doRedraw(Resources *r) {
 	{ 0.0, 0.0, 1.0, 0.0 },
 	{ 0.0, 0.0, 1.0, 0.0 },
 
-    { 1.0, 1.0, 0.0, 0.0 },
-    { 1.0, 1.0, 0.0, 0.0 },
-    { 1.0, 1.0, 0.0, 0.0 },
-    { 1.0, 1.0, 0.0, 0.0 },
+	{ 1.0, 1.0, 0.0, 0.0 },
+	{ 1.0, 1.0, 0.0, 0.0 },
+	{ 1.0, 1.0, 0.0, 0.0 },
+	{ 1.0, 1.0, 0.0, 0.0 },
 
-    { 1.0, 0.0, 1.0, 0.0 },
-    { 1.0, 0.0, 1.0, 0.0 },
-    { 1.0, 0.0, 1.0, 0.0 },
-    { 1.0, 0.0, 1.0, 0.0 },
+	{ 1.0, 0.0, 1.0, 0.0 },
+	{ 1.0, 0.0, 1.0, 0.0 },
+	{ 1.0, 0.0, 1.0, 0.0 },
+	{ 1.0, 0.0, 1.0, 0.0 },
 
-    { 0.0, 1.0, 1.0, 0.0 },
-    { 0.0, 1.0, 1.0, 0.0 },
-    { 0.0, 1.0, 1.0, 0.0 },
-    { 0.0, 1.0, 1.0, 0.0 } };
+	{ 0.0, 1.0, 1.0, 0.0 },
+	{ 0.0, 1.0, 1.0, 0.0 },
+	{ 0.0, 1.0, 1.0, 0.0 },
+	{ 0.0, 1.0, 1.0, 0.0 } };
+
+  GLfloat normals[24][4] = {
+	  { 0.0, 0.0, -1.0, 0.0 },
+	  { 0.0, 0.0, -1.0, 0.0 },
+	  { 0.0, 0.0, -1.0, 0.0 },
+	  { 0.0, 0.0, -1.0, 0.0 },
+
+	  { 0.0, 0.0, +1.0, 0.0 },
+	  { 0.0, 0.0, +1.0, 0.0 },
+	  { 0.0, 0.0, +1.0, 0.0 },
+	  { 0.0, 0.0, +1.0, 0.0 },
+
+	  { -1.0, 0.0, 0.0, 0.0 },
+	  { -1.0, 0.0, 0.0, 0.0 },
+	  { -1.0, 0.0, 0.0, 0.0 },
+	  { -1.0, 0.0, 0.0, 0.0 },
+
+	  { +1.0, 0.0, 0.0, 0.0 },
+	  { +1.0, 0.0, 0.0, 0.0 },
+	  { +1.0, 0.0, 0.0, 0.0 },
+	  { +1.0, 0.0, 0.0, 0.0 },
+
+	  { 0.0, -1.0, 0.0, 0.0 },
+	  { 0.0, -1.0, 0.0, 0.0 },
+	  { 0.0, -1.0, 0.0, 0.0 },
+	  { 0.0, -1.0, 0.0, 0.0 },
+
+	  { 0.0, +1.0, 0.0, 0.0 },
+	  { 0.0, +1.0, 0.0, 0.0 },
+	  { 0.0, +1.0, 0.0, 0.0 },
+	  { 0.0, +1.0, 0.0, 0.0 } };
+ 
+
+  GLfloat textureCoordinates[24][2] = {
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 },
+
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 },
+
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 },
+
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 },
+
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 },
+
+	  { 0.0, 1.0 },
+	  { 0.0, 0.0 },
+	  { 1.0, 0.0 },
+	  { 1.0, 1.0 } };
+
 
   GLfloat phase[8] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
+
+  glm::vec4 light0pos = { 2, 1, 0, 1 };
+
   /* This is a list of graphic primitives (as triangles), that reference the above vertices */
   //GLuint indices[2][4] = {{0,1,2,3},{4,5,6,7}};
 
@@ -204,12 +291,31 @@ void World::doRedraw(Resources *r) {
   glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "projectionMatrix"), 1, GL_FALSE, &projectionMatrix[0][0]);
   glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "modelviewMatrix"), 1, GL_FALSE, &modelviewMatrix[0][0]);
 
+  glUniform4fv(glGetUniformLocation(r->shaderProgram, "light0pos"), 1, &light0pos[0]);
+
+  glUniform1i(glGetUniformLocation(r->shaderProgram, "diffuseTexture"), 0);
+  glUniform1i(glGetUniformLocation(r->shaderProgram, "specularTexture"), 1);
+
   /* Attrib, N-Elements, Type, Normalize, Stride, Pointer */
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) vertices);  
   glEnableVertexAttribArray(0);
 
   glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*) colour);
   glEnableVertexAttribArray(1);
+
+  glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, (void*) normals);
+  glEnableVertexAttribArray(2);
+
+  glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, (void*) textureCoordinates);
+  glEnableVertexAttribArray(3);
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, r->diffuseTexture);
+  glEnable(GL_TEXTURE_2D);
+
+  glActiveTexture(GL_TEXTURE0 + 1);
+  glBindTexture(GL_TEXTURE_2D, r->specularTexture);
+  glEnable(GL_TEXTURE_2D);
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
