@@ -1,9 +1,23 @@
-﻿Build started 2015-11-09 10:23:01.
-     1>Project "D:\Dev\datorgrafik\labb1\labb1.vcxproj" on node 3 (Build target(s)).
-     1>Link:
-         labb1.vcxproj -> D:\Dev\datorgrafik\labb1\x64\Release\labb1.exe
-     1>Done Building Project "D:\Dev\datorgrafik\labb1\labb1.vcxproj" (Build target(s)).
+﻿Build started 2015-11-11 20:11:39.
+     1>Project "D:\Dev\Datorgrafik\labb1\labb1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I"..\OpenGl\SDL-1.2.15\include" /I"..\OpenGl\SDL_image-1.2.12\include" /I"..\OpenGl\glew-1.11.0\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D _CRT_SECURE_NO_WARNINGS /D USE_STANDARD_FILE_FUNCTIONS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt glUtil.cc main.cc
+         glUtil.cc
+     1>glUtil.cc(52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+     1>glUtil.cc(27): warning C4101: 'logName': unreferenced local variable
+         main.cc
+     1>main.cc(106): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Dev\Datorgrafik\labb1\x64\Release\labb1.exe" /NOLOGO /LIBPATH:"..\OpenGl\SDL-1.2.15\lib\x64" /LIBPATH:"..\OpenGl\SDL_image-1.2.12\lib\x64" /LIBPATH:"..\OpenGl\glew-1.11.0\lib\Release\x64" opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Dev\Datorgrafik\labb1\x64\Release\labb1.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Dev\Datorgrafik\labb1\x64\Release\labb1.lib" /MACHINE:X64 x64\Release\glUtil.obj
+         x64\Release\main.obj
+         Generating code
+         12 of 14 functions (85.7%) were compiled, the rest were copied from previous compilation.
+           0 functions were new in current compilation
+           0 functions had inline decision re-evaluated but remain unchanged
+         Finished generating code
+         labb1.vcxproj -> D:\Dev\Datorgrafik\labb1\x64\Release\labb1.exe
+     1>Done Building Project "D:\Dev\Datorgrafik\labb1\labb1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.70
+Time Elapsed 00:00:02.14

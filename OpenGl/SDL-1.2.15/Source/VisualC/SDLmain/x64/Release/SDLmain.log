@@ -1,0 +1,28 @@
+﻿Build started 2015-11-04 18:16:14.
+     1>Project "D:\OpenGl\SDL-1.2.15\Source\VisualC\SDLmain\SDLmain.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /I..\..\include /I..\..\include\SDL /Zi /nologo /W3 /WX- /O2 /D WIN32 /D NDEBUG /D _WINDOWS /D _VC80_UPGRADE=0x0600 /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo".\Release\\" /Fd".\Release\SDLmain.pdb" /Gd /TC /errorReport:prompt ..\..\Src\Main\Win32\SDL_win32_main.c
+         SDL_win32_main.c
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(177): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(187): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(224): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(240): note: see declaration of 'freopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(231): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(247): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(240): note: see declaration of 'freopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(253): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+     1>..\..\Src\Main\Win32\SDL_win32_main.c(262): warning C4996: 'setbuf': This function or variable may be unsafe. Consider using setvbuf instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\stdio.h(396): note: see declaration of 'setbuf'
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1357,5): warning MSB8012: TargetPath(D:\OpenGl\SDL-1.2.15\Source\VisualC\x64\Release\SDLmain.lib) does not match the Library's OutputFile property value (D:\OpenGl\SDL-1.2.15\Source\VisualC\SDLmain\Release\SDLmain.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\Lib.exe /OUT:".\Release\SDLmain.lib" /NOLOGO /MACHINE:X64 .\Release\SDL_win32_main.obj
+         SDLmain.vcxproj -> D:\OpenGl\SDL-1.2.15\Source\VisualC\x64\Release\SDLmain.lib
+     1>Done Building Project "D:\OpenGl\SDL-1.2.15\Source\VisualC\SDLmain\SDLmain.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.41

@@ -1,0 +1,14 @@
+﻿Build started 2015-11-04 17:52:09.
+     1>Project "D:\Dev\Datorgrafik\labb1\labb1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt glUtil.cc main.cc
+         main.cc
+     1>d:\dev\datorgrafik\labb1\general.h(18): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         glUtil.cc
+     1>d:\dev\datorgrafik\labb1\general.h(18): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+         Generating Code...
+     1>Done Building Project "D:\Dev\Datorgrafik\labb1\labb1.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.10
