@@ -1,0 +1,16 @@
+﻿Build started 2015-11-24 11:29:04.
+     1>Project "D:\Dev\datorgrafik\labb3\labb3.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Dev\datorgrafik\labb3\x64\Release\labb3.exe" /NOLOGO /LIBPATH:"..\OpenGl\SDL-1.2.15\lib\x64" /LIBPATH:"..\OpenGl\SDL_image-1.2.12\lib\x64" /LIBPATH:"..\OpenGl\glew-1.11.0\lib\Release\x64" opengl32.lib glu32.lib SDL.lib SDL_image.lib SDLmain.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Dev\datorgrafik\labb3\x64\Release\labb3.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Dev\datorgrafik\labb3\x64\Release\labb3.lib" /MACHINE:X64 x64\Release\glUtil.obj
+         x64\Release\main.obj
+         Generating code
+     1>d:\dev\datorgrafik\labb2\main.cc(417): warning C4715: 'SDL_main': not all control paths return a value
+         All 54 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+         Finished generating code
+     1>SDLmain.lib(SDL_win32_main.obj) : warning LNK4099: PDB 'SDLmain.pdb' was not found with 'SDLmain.lib(SDL_win32_main.obj)' or at 'D:\Dev\datorgrafik\labb3\x64\Release\SDLmain.pdb'; linking object as if no debug info
+         labb3.vcxproj -> D:\Dev\datorgrafik\labb3\x64\Release\labb3.exe
+     1>Done Building Project "D:\Dev\datorgrafik\labb3\labb3.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.54
