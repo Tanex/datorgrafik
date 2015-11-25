@@ -25,13 +25,23 @@
 class Resources {
 //part 2
 private:
-	int numVertices(AC3DObject* node);
-	void modelTraversal(AC3DObject* node, int* bufIndex);
-	void modelLeaf(AC3DObject* obj, int* bufIndex);
+	void calcArraySizes();
+	void traverseAndCount(AC3DObject* node);
+
+	void modelTraversal(AC3DObject* node, int* vertexBufIndex, int* triIndicesBufIndex, int* quadIndicesBufIndex);
+	void modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesBufIndex, int* quadIndicesBufIndex);
+	int sizeOfVertexBuffer;
+	int sizeOfTriIndiceBuffer;
+	int sizeOfQuadIndiceBuffer;
 
 public:
-	glm::vec4* buffer;
-	void buildBuffer(AC3DObject* node);
+	glm::vec4* vertexBuffer;
+	glm::ivec3* triIndiceBuffer;
+	glm::ivec4* quadIndiceBuffer;
+	void buildBuffers(AC3DObject* node);
+	int getVertexBufSize() { return sizeOfVertexBuffer; }
+	int getTriIndicesBufSize() { return sizeOfTriIndiceBuffer; }
+	int getQuadIndicesBufSize() { return sizeOfQuadIndiceBuffer; }
 
   Resources();
   ~Resources();
@@ -68,10 +78,15 @@ public:
 
   //draws a model
   void modelRedraw(AC3DObject* node, Resources* r);
-  void modelRedrawLeaf(AC3DObject* obj);
+
+  void modelRedrawWBuf(AC3DObject* node, Resources* r);
 
 private:
   double time;
+
+  void modelRedrawLeaf(AC3DObject* obj);
+  void modelRedrawTraverseWBuf(AC3DObject* node, Resources* r, int* verticesUsed);
+  void modelRedrawLeafWBuf(AC3DObject* obj, Resources* r, int* verticesUsed);
 };
 
 /* Important global variables */
@@ -90,7 +105,9 @@ Resources::Resources() {
 
   factory = AC3DObjectFactory();
 
-  buffer = nullptr;
+  vertexBuffer = nullptr; 
+  triIndiceBuffer = nullptr;
+  quadIndiceBuffer = nullptr;
 
   reload();
 }
@@ -113,47 +130,75 @@ void Resources::reload() {
   model = factory.loadAC3D("fighter.ac");
 
   //part 2
-  buildBuffer(model);
+  buildBuffers(model);
 
   isOk=1;
 }
 
-int Resources::numVertices(AC3DObject* node)
+void Resources::calcArraySizes()
 {
-	int sumVertices = 0;
-	if (node->nChildren > 0)
-	{
-		for (int i = 0; i < node->nChildren; i++)
-			sumVertices += numVertices(node->children[i]);
-	}
-	else
-		sumVertices += node->nVertices * 2; //*2 so that normals can be stored too
-
-	return sumVertices;
+	sizeOfVertexBuffer = sizeOfTriIndiceBuffer = sizeOfQuadIndiceBuffer = 0;
+	traverseAndCount(model);
 }
 
-void Resources::modelTraversal(AC3DObject* node, int* bufIndex)
+void Resources::traverseAndCount(AC3DObject* node)
 {
 	if (node->nChildren > 0)
 	{
 		for (int i = 0; i < node->nChildren; i++)
-			modelTraversal(node->children[i], bufIndex);
+			traverseAndCount(node->children[i]);
 	}
 	else
-		modelLeaf(node, bufIndex);
+	{
+		sizeOfVertexBuffer += node->nVertices * 2; //*2 so that normals can be stored too
+		for (int i = 0; i < node->nSurfaces; i++)
+		{
+			if (node->surfaces[i].nVertices == 3)
+				sizeOfTriIndiceBuffer += 3;
+			else //if (node->surfaces[i].nVertices == 4)
+				sizeOfQuadIndiceBuffer += 4;
+		}
+	}
 }
 
-void Resources::modelLeaf(AC3DObject* obj, int* bufIndex)
+
+void Resources::modelTraversal(AC3DObject* node, int* vertexBufIndex, int* triIndicesBufIndex, int* quadIndicesBufIndex)
 {
-	//glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
+	if (node->nChildren > 0)
+	{
+		for (int i = 0; i < node->nChildren; i++)
+			modelTraversal(node->children[i], vertexBufIndex, triIndicesBufIndex, quadIndicesBufIndex);
+	}
+	else
+		modelLeaf(node, vertexBufIndex, triIndicesBufIndex, quadIndicesBufIndex);
+}
+
+static int verticesUsed = 0;
+
+void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesBufIndex, int* quadIndicesBufIndex)
+{
+	glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
 
 	//Create indices
-	/*for (int i = 0; i < obj->nSurfaces; i++)
+	for (int i = 0; i < obj->nSurfaces; i++)
 	{
 		AC3DSurface surface = obj->surfaces[i];
 		for (int j = 0; j < surface.nVertices; j++)
-			indices[i][j] = surface.vert[j].index;
-	}*/
+			indices[i][j] = surface.vert[j].index + verticesUsed;// *vertexBufIndex; //compensate for already added objects
+	}
+
+	verticesUsed += obj->nVertices;
+
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		if (obj->surfaces->nVertices == 3)
+			triIndiceBuffer[(*triIndicesBufIndex)++] = (glm::ivec3)indices[i];
+		else //if (obj->surfaces->nVertices == 4)
+			quadIndiceBuffer[(*quadIndicesBufIndex)++] = indices[i];
+	}
+
+	delete indices;
+
 
 	glm::vec4* normals = new glm::vec4[obj->nVertices];
 	//Zero all normals
@@ -187,28 +232,113 @@ void Resources::modelLeaf(AC3DObject* obj, int* bufIndex)
 	for (int i = 0; i < obj->nVertices; i++)
 		normals[i] = glm::normalize(normals[i]);
 
-	for (int i = 0; i < obj->nVertices / 4; i++)
+	for (int i = 0; i < obj->nVertices; i++)
 	{
-		buffer[(*bufIndex)++] = glm::vec4(obj->vertices[i * 4], obj->vertices[i * 4 + 1], obj->vertices[i * 4 + 2], obj->vertices[i * 4 + 3]);
-		buffer[(*bufIndex)++] = normals[i];
+		vertexBuffer[(*vertexBufIndex)++] = glm::vec4(obj->vertices[i * 4], obj->vertices[i * 4 + 1], obj->vertices[i * 4 + 2], obj->vertices[i * 4 + 3]);
+		vertexBuffer[(*vertexBufIndex)++] = normals[i];
 	}
 
 	delete normals;
 	delete surface_normals;
 }
 
-void Resources::buildBuffer(AC3DObject* node)
+void Resources::buildBuffers(AC3DObject* node)
 {
-	if (buffer != nullptr)
-		delete buffer;
-	buffer = new glm::vec4[numVertices(model)];
+	calcArraySizes();
 
-	int bufIndex = 0;
-	modelTraversal(node, &bufIndex);
+	if (vertexBuffer != nullptr)
+		delete vertexBuffer;
+	vertexBuffer = new glm::vec4[sizeOfVertexBuffer];
+
+	if (triIndiceBuffer != nullptr)
+		delete triIndiceBuffer;
+	triIndiceBuffer = new glm::ivec3[sizeOfTriIndiceBuffer];
+
+	if (quadIndiceBuffer != nullptr)
+		delete quadIndiceBuffer;
+	quadIndiceBuffer = new glm::ivec4[sizeOfQuadIndiceBuffer];
+
+	verticesUsed = 0;
+
+	int vertexBufIndex = 0, triIndicesBufBufIndex = 0, quadIndicesBufBufIndex = 0;
+	modelTraversal(node, &vertexBufIndex, &triIndicesBufBufIndex, &quadIndicesBufBufIndex);
 }
 
 World::World() {
   time=0.0;
+}
+
+void World::modelRedrawWBuf(AC3DObject* node, Resources* r)
+{
+	//Setup attribPointers
+	/*glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[0]);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[1]);
+	glEnableVertexAttribArray(2);*/
+
+	//Setup attribPointers with vertexBuffer
+	GLuint gpuBuffer[1];
+	glGenBuffers(1, gpuBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4)*r->getVertexBufSize(), (void*)r->vertexBuffer, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, nullptr);
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*)sizeof(glm::vec4));
+	glEnableVertexAttribArray(2);
+
+	int verticesUsed = 0;
+	modelRedrawTraverseWBuf(node, r, &verticesUsed);
+}
+
+void World::modelRedrawTraverseWBuf(AC3DObject* node, Resources* r, int* verticesUsed)
+{
+	if (node->nChildren > 0)
+	{
+		for (int i = 0; i < node->nChildren; i++)
+			modelRedrawTraverseWBuf(node->children[i], r, verticesUsed);
+	}
+	else
+		modelRedrawLeafWBuf(node, r, verticesUsed);
+}
+
+void World::modelRedrawLeafWBuf(AC3DObject* obj, Resources* r, int* verticesUsed)
+{
+	/*glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
+
+	//Create indices
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		AC3DSurface surface = obj->surfaces[i];
+		for (int j = 0; j < surface.nVertices; j++)
+			indices[i][j] = surface.vert[j].index + *verticesUsed;
+	}
+
+	*verticesUsed += obj->nVertices;
+
+	//Draw
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		if (obj->surfaces[i].nVertices == 3)
+			glDrawElements(GL_TRIANGLES, 1 * 3, GL_UNSIGNED_INT, &indices[i][0]);
+		else //(obj->surfaces[i].nVertices == 4)
+			glDrawElements(GL_QUADS, 1 * 4, GL_UNSIGNED_INT, &indices[i][0]);
+	}
+
+	delete indices;*/
+
+	GLuint gpuBuffer[1];
+	glGenBuffers(1, gpuBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gpuBuffer[0]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getTriIndicesBufSize(), (void*)r->triIndiceBuffer, GL_STATIC_DRAW);
+
+	glDrawElements(GL_TRIANGLES, 3 * r->getTriIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
+
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getQuadIndicesBufSize(), (void*)r->quadIndiceBuffer, GL_STATIC_DRAW);
+
+	glDrawElements(GL_QUADS, 4 * r->getQuadIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
 }
 
 void World::modelRedraw(AC3DObject* node, Resources* r)
@@ -221,6 +351,8 @@ void World::modelRedraw(AC3DObject* node, Resources* r)
 	else
 		modelRedrawLeaf(node);
 }
+
+
 void World::modelRedrawLeaf(AC3DObject* obj)
 {
 	glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
@@ -344,7 +476,8 @@ void World::doRedraw(Resources *r) {
   glUniform4fv(glGetUniformLocation(r->shaderProgram, "light0pos"), 1, &light0pos[0]);
 
   //Draw model
-  modelRedraw(r->model, r);
+  //modelRedraw(r->model, r);
+  modelRedrawWBuf(r->model, r);
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
