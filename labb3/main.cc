@@ -18,14 +18,24 @@
 
 #include "general.h"
 #include "glUtil.h"
-#include "glm.hpp"
+#include "glm/glm.hpp"
 #include "gtc/matrix_transform.hpp"
 
 /** Container for all OpenGL related resources such as textures and shaders that are used in the labs */
 class Resources {
+//part 2
+private:
+	int numVertices(AC3DObject* node);
+	void modelTraversal(AC3DObject* node, int* bufIndex);
+	void modelLeaf(AC3DObject* obj, int* bufIndex);
+
 public:
+	glm::vec4* buffer;
+	void buildBuffer(AC3DObject* node);
+
   Resources();
-  ~Resources(); 
+  ~Resources();
+
 
   /** Function to (re)load the content of all resources such as textures and shaders */
   void reload();
@@ -34,7 +44,9 @@ public:
      private variables with 'inlined' accessors (but not modifier)
      functions... but this is not a course about proper C++
      programming so we're gonna be lazy for now */
-  GLuint fragmentShader, vertexShader, shaderProgram, diffuseTexture, specularTexture;
+  GLuint fragmentShader, vertexShader, shaderProgram;
+  AC3DObjectFactory factory;
+  AC3DObject* model;
 
   /** Mark if the loaded shader code is "ok" or not - do not attempt to use any shaders or 
       draw anything if false. */
@@ -53,6 +65,11 @@ public:
   void tick(double deltaTime);
   /** Handles keyboard input */
   void doKeyboard(int,int,int);
+
+  //draws a model
+  void modelRedraw(AC3DObject* node, Resources* r);
+  void modelRedrawLeaf(AC3DObject* obj);
+
 private:
   double time;
 };
@@ -65,16 +82,16 @@ World *world;
 
 Resources::Resources() {
   /* Create shader and program objects, attach shaders to program */
-	GLuint textures[2];
-	glGenTextures(2, &textures[0]);
-	diffuseTexture = textures[0];
-	specularTexture = textures[1];
-
   vertexShader = glCreateShader(GL_VERTEX_SHADER);
   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
   shaderProgram = glCreateProgram();
   glAttachShader(shaderProgram, vertexShader);
   glAttachShader(shaderProgram, fragmentShader);
+
+  factory = AC3DObjectFactory();
+
+  buffer = nullptr;
+
   reload();
 }
 Resources::~Resources() {
@@ -93,14 +110,195 @@ void Resources::reload() {
   /* Link all shader programs */
   if(linkProgram(shaderProgram,"program.log")) return;
 
-  if (loadTexture(diffuseTexture, "texture1.png", 1)) return;
-  if (loadTexture(specularTexture, "texture2.png", 1)) return;
+  model = factory.loadAC3D("fighter.ac");
+
+  //part 2
+  buildBuffer(model);
+
   isOk=1;
+}
+
+int Resources::numVertices(AC3DObject* node)
+{
+	int sumVertices = 0;
+	if (node->nChildren > 0)
+	{
+		for (int i = 0; i < node->nChildren; i++)
+			sumVertices += numVertices(node->children[i]);
+	}
+	else
+		sumVertices += node->nVertices * 2; //*2 so that normals can be stored too
+
+	return sumVertices;
+}
+
+void Resources::modelTraversal(AC3DObject* node, int* bufIndex)
+{
+	if (node->nChildren > 0)
+	{
+		for (int i = 0; i < node->nChildren; i++)
+			modelTraversal(node->children[i], bufIndex);
+	}
+	else
+		modelLeaf(node, bufIndex);
+}
+
+void Resources::modelLeaf(AC3DObject* obj, int* bufIndex)
+{
+	//glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
+
+	//Create indices
+	/*for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		AC3DSurface surface = obj->surfaces[i];
+		for (int j = 0; j < surface.nVertices; j++)
+			indices[i][j] = surface.vert[j].index;
+	}*/
+
+	glm::vec4* normals = new glm::vec4[obj->nVertices];
+	//Zero all normals
+	for (int i = 0; i < obj->nVertices; i++)
+		normals[i] = glm::vec4(0);
+
+	//Create normals
+	glm::vec4* surface_normals = new glm::vec4[obj->nSurfaces];
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		glm::vec3 vertices[3];
+
+		for (int j = 0; j < 3; j++)
+			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index],
+				obj->vertices[obj->surfaces[i].vert[j].index + 1],
+				obj->vertices[obj->surfaces[i].vert[j].index + 2]);
+
+		glm::vec3 normal = glm::cross(glm::normalize(vertices[1] - vertices[0]), glm::normalize(vertices[2] - vertices[1]));
+
+		surface_normals[i].x = normal.x;
+		surface_normals[i].y = normal.y;
+		surface_normals[i].z = normal.z;
+	}
+
+	//Assign normals to vertices (proper method)
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		for (int j = 0; j < obj->surfaces[i].nVertices; j++)
+			normals[obj->surfaces[i].vert[j].index] += surface_normals[i];
+	}
+	for (int i = 0; i < obj->nVertices; i++)
+		normals[i] = glm::normalize(normals[i]);
+
+	for (int i = 0; i < obj->nVertices / 4; i++)
+	{
+		buffer[(*bufIndex)++] = glm::vec4(obj->vertices[i * 4], obj->vertices[i * 4 + 1], obj->vertices[i * 4 + 2], obj->vertices[i * 4 + 3]);
+		buffer[(*bufIndex)++] = normals[i];
+	}
+
+	delete normals;
+	delete surface_normals;
+}
+
+void Resources::buildBuffer(AC3DObject* node)
+{
+	if (buffer != nullptr)
+		delete buffer;
+	buffer = new glm::vec4[numVertices(model)];
+
+	int bufIndex = 0;
+	modelTraversal(node, &bufIndex);
 }
 
 World::World() {
   time=0.0;
 }
+
+void World::modelRedraw(AC3DObject* node, Resources* r)
+{
+	if (node->nChildren > 0)
+	{
+		for (int i = 0; i < node->nChildren; i++)
+			modelRedraw(node->children[i], r);
+	}
+	else
+		modelRedrawLeaf(node);
+}
+void World::modelRedrawLeaf(AC3DObject* obj)
+{
+	glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
+	glm::vec4* normals = new glm::vec4[obj->nVertices];
+	glm::vec4* colors = new glm::vec4[obj->nVertices];
+
+	//Create indices
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		AC3DSurface surface = obj->surfaces[i];
+		for (int j = 0; j < surface.nVertices; j++)
+			indices[i][j] = surface.vert[j].index;
+	}
+
+	//Zero all normals
+	for (int i = 0; i < obj->nVertices; i++)
+		normals[i] = glm::vec4(0);
+
+	//Create normals
+	glm::vec4* surface_normals = new glm::vec4[obj->nSurfaces];
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		glm::vec3 vertices[3];
+
+		for (int j = 0; j < 3; j++)
+			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index],
+									obj->vertices[obj->surfaces[i].vert[j].index + 1],
+									obj->vertices[obj->surfaces[i].vert[j].index + 2]);
+
+		glm::vec3 normal = glm::cross(glm::normalize(vertices[1] - vertices[0]), glm::normalize(vertices[2] - vertices[1]));
+
+		surface_normals[i].x = normal.x;
+		surface_normals[i].y = normal.y;
+		surface_normals[i].z = normal.z;
+	}
+
+	//Assign normals to vertices (hack method)
+	/*for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		for (int j = 0; j < obj->surfaces[i].nVertices; j++)
+			normals[obj->surfaces[i].vert[j].index] = surface_normals[i];
+	}*/
+
+	//Assign normals to vertices (proper method)
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		for (int j = 0; j < obj->surfaces[i].nVertices; j++)
+			normals[obj->surfaces[i].vert[j].index] += surface_normals[i];
+	}
+	for (int i = 0; i < obj->nVertices; i++)
+		normals[i] = glm::normalize(normals[i]);
+
+	//Setup attribPointers
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) obj->vertices);  
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*) colors);
+	glEnableVertexAttribArray(1);
+	
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, (void*) normals);
+	glEnableVertexAttribArray(2);
+
+	//Draw
+	for (int i = 0; i < obj->nSurfaces; i++)
+	{
+		if (obj->surfaces[i].nVertices == 3)
+			glDrawElements(GL_TRIANGLES, 1 * 3, GL_UNSIGNED_INT, &indices[i][0]);
+		else //(obj->surfaces[i].nVertices == 4)
+			glDrawElements(GL_QUADS, 1 * 4, GL_UNSIGNED_INT, &indices[i][0]);
+	}
+
+	delete indices;
+	delete normals;
+	delete colors;
+	delete surface_normals;
+}
+
+
 
 void World::doRedraw(Resources *r) {
   GLuint error;
@@ -113,219 +311,43 @@ void World::doRedraw(Resources *r) {
 
   glClearColor(0.0,0.0,0.0,0.0);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  
+  /* Specify four vertices, each consisting of four XYZW points. */
+  float sw=screenWidth, sh=screenHeight;
 
-  GLfloat n = 1, f = 10;
-  GLfloat a = (f + n) / (f - n);
-  GLfloat b = 2 * f*n / (f - n);
+  const GLfloat n = 1, f = 10;
+  const GLfloat a = (f + n) / (f - n);
+  const GLfloat b = 2 * f*n / (f - n);
 
   // projectionMatrix
-  GLfloat projectionMatrix[4][4] = {
+  const GLfloat projectionMatrix[4][4] = {
 	  { 1.0, 0.0, 0.0, 0.0 },
 	  { 0.0, 1.0, 0.0, 0.0 },
 	  { 0.0, 0.0,  -a,  -b },
 	  { 0.0, 0.0,  -1, 0.0 } };
- 
-  GLfloat alpha = time;
-  // modelviewMatrix
-  /*GLfloat modelviewMatrix[4][4] = {
-	  { cos(alpha),		0.0,	sin(alpha),		0.0 },
-	  { 0.0,			1.0,	0.0,			0.0 },
-	  { -sin(alpha),	0.0,	cos(alpha),		0.0 },
-	  { 0.0,			0.0,	-4.0,			1.0 } };*/
 
-  /*glm::mat4 modelviewMatrix = {
-	  { cos(alpha),		0.0,	sin(alpha),		0.0 },
-	  { 0.0,			1.0,	0.0,			0.0 },
-	  { -sin(alpha),	0.0,	cos(alpha),		0.0 },
-	  { 0.0,			0.0,	-4.0,			1.0 } };*/
-
-  glm::mat4 modelviewMatrix = 
-	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -4)) * 
-	  glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0, 1, 0)) * 
+  // modelviewatrix
+  glm::mat4 modelviewMatrix =
+	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -4)) *
+	  glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0, 1, 0)) *
 	  glm::rotate(glm::mat4(1.0f), 0.4f*(float)time, glm::vec3(1, 0, 0));
-  
-  /* Specify four vertices, each consisting of four XYZW points. */
-  float sw=screenWidth, sh=screenHeight;   
 
-  /*GLfloat vertices[4][4] = {
-	  { -1.0, -1.0, -1.0, 1.0 },
-	  { 1.0 , -1.0, +1.0, 1.0 },
-	  { 1.0 , +1.0 , +1.0, 1.0 },
-	  { -1.0, +1.0 , -1.0, 1.0 } };*/
-
-  GLfloat vertices[24][4] = {
-	  { -1.0, -1.0, -1.0, 1.0 },
-	  { -1.0, +1.0, -1.0, 1.0 }, 
-	  { +1.0, +1.0, -1.0, 1.0 },
-	  { +1.0, -1.0, -1.0, 1.0 },
-
-	  { -1.0, -1.0, +1.0, 1.0 },
-	  { -1.0, +1.0, +1.0, 1.0 },
-	  { +1.0, +1.0, +1.0, 1.0 },
-	  { +1.0, -1.0, +1.0, 1.0 },
-
-	  { -1.0, -1.0, -1.0, 1.0 },
-	  { -1.0, -1.0, +1.0, 1.0 },
-	  { -1.0, +1.0, +1.0, 1.0 },
-	  { -1.0, +1.0, -1.0, 1.0 },
-
-	  { +1.0, -1.0, -1.0, 1.0 },
-	  { +1.0, -1.0, +1.0, 1.0 },
-	  { +1.0, +1.0, +1.0, 1.0 },
-	  { +1.0, +1.0, -1.0, 1.0 },
-
-	  { -1.0, -1.0, -1.0, 1.0 },
-	  { -1.0, -1.0, +1.0, 1.0 },
-	  { +1.0, -1.0, +1.0, 1.0 },
-	  { +1.0, -1.0, -1.0, 1.0 },
-
-	  { -1.0, +1.0, -1.0, 1.0 },
-	  { -1.0, +1.0, +1.0, 1.0 },
-	  { +1.0, +1.0, +1.0, 1.0 },
-	  { +1.0, +1.0, -1.0, 1.0 } };
-
-  GLfloat colour[24][4] = {
-	{ 1.0, 0.0, 0.0, 0.0 },
-	{ 1.0, 0.0, 0.0, 0.0 },    
-	{ 1.0, 0.0, 0.0, 0.0 },
-	{ 1.0, 0.0, 0.0, 0.0 },
-
-	{ 0.0, 1.0, 0.0, 0.0 },
-	{ 0.0, 1.0, 0.0, 0.0 },
-	{ 0.0, 1.0, 0.0, 0.0 },
-	{ 0.0, 1.0, 0.0, 0.0 },
-
-	{ 0.0, 0.0, 1.0, 0.0 },
-	{ 0.0, 0.0, 1.0, 0.0 },
-	{ 0.0, 0.0, 1.0, 0.0 },
-	{ 0.0, 0.0, 1.0, 0.0 },
-
-	{ 1.0, 1.0, 0.0, 0.0 },
-	{ 1.0, 1.0, 0.0, 0.0 },
-	{ 1.0, 1.0, 0.0, 0.0 },
-	{ 1.0, 1.0, 0.0, 0.0 },
-
-	{ 1.0, 0.0, 1.0, 0.0 },
-	{ 1.0, 0.0, 1.0, 0.0 },
-	{ 1.0, 0.0, 1.0, 0.0 },
-	{ 1.0, 0.0, 1.0, 0.0 },
-
-	{ 0.0, 1.0, 1.0, 0.0 },
-	{ 0.0, 1.0, 1.0, 0.0 },
-	{ 0.0, 1.0, 1.0, 0.0 },
-	{ 0.0, 1.0, 1.0, 0.0 } };
-
-  GLfloat normals[24][4] = {
-	  { 0.0, 0.0, -1.0, 0.0 },
-	  { 0.0, 0.0, -1.0, 0.0 },
-	  { 0.0, 0.0, -1.0, 0.0 },
-	  { 0.0, 0.0, -1.0, 0.0 },
-
-	  { 0.0, 0.0, +1.0, 0.0 },
-	  { 0.0, 0.0, +1.0, 0.0 },
-	  { 0.0, 0.0, +1.0, 0.0 },
-	  { 0.0, 0.0, +1.0, 0.0 },
-
-	  { -1.0, 0.0, 0.0, 0.0 },
-	  { -1.0, 0.0, 0.0, 0.0 },
-	  { -1.0, 0.0, 0.0, 0.0 },
-	  { -1.0, 0.0, 0.0, 0.0 },
-
-	  { +1.0, 0.0, 0.0, 0.0 },
-	  { +1.0, 0.0, 0.0, 0.0 },
-	  { +1.0, 0.0, 0.0, 0.0 },
-	  { +1.0, 0.0, 0.0, 0.0 },
-
-	  { 0.0, -1.0, 0.0, 0.0 },
-	  { 0.0, -1.0, 0.0, 0.0 },
-	  { 0.0, -1.0, 0.0, 0.0 },
-	  { 0.0, -1.0, 0.0, 0.0 },
-
-	  { 0.0, +1.0, 0.0, 0.0 },
-	  { 0.0, +1.0, 0.0, 0.0 },
-	  { 0.0, +1.0, 0.0, 0.0 },
-	  { 0.0, +1.0, 0.0, 0.0 } };
- 
-
-  GLfloat textureCoordinates[24][2] = {
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 },
-
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 },
-
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 },
-
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 },
-
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 },
-
-	  { 0.0, 1.0 },
-	  { 0.0, 0.0 },
-	  { 1.0, 0.0 },
-	  { 1.0, 1.0 } };
-
-
-  GLfloat phase[8] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
-
-  glm::vec4 light0pos = { 2, 1, 0, 1 };
-
-  /* This is a list of graphic primitives (as triangles), that reference the above vertices */
-  //GLuint indices[2][4] = {{0,1,2,3},{4,5,6,7}};
+  // light position
+  const glm::vec4 light0pos = { 2, 1, 0, 1 };
 
   glUseProgram(r->shaderProgram);
 
+  //Pass over matrices
   glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "projectionMatrix"), 1, GL_FALSE, &projectionMatrix[0][0]);
   glUniformMatrix4fv(glGetUniformLocation(r->shaderProgram, "modelviewMatrix"), 1, GL_FALSE, &modelviewMatrix[0][0]);
 
   glUniform4fv(glGetUniformLocation(r->shaderProgram, "light0pos"), 1, &light0pos[0]);
 
-  glUniform1i(glGetUniformLocation(r->shaderProgram, "diffuseTexture"), 0);
-  glUniform1i(glGetUniformLocation(r->shaderProgram, "specularTexture"), 1);
-
-  /* Attrib, N-Elements, Type, Normalize, Stride, Pointer */
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*) vertices);  
-  glEnableVertexAttribArray(0);
-
-  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*) colour);
-  glEnableVertexAttribArray(1);
-
-  glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 0, (void*) normals);
-  glEnableVertexAttribArray(2);
-
-  glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 0, (void*) textureCoordinates);
-  glEnableVertexAttribArray(3);
-
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, r->diffuseTexture);
-  glEnable(GL_TEXTURE_2D);
-
-  glActiveTexture(GL_TEXTURE0 + 1);
-  glBindTexture(GL_TEXTURE_2D, r->specularTexture);
-  glEnable(GL_TEXTURE_2D);
+  //Draw model
+  modelRedraw(r->model, r);
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
-
-  /* (a) This draws the two triangles given by vertex 0,1,2 and 2,3,0 */
-  //glDrawElements(GL_QUADS, 1*4, GL_UNSIGNED_INT, &indices[0][0]);
-  /* (b) This alternative draws the four vertices directly as a rectangle on the screen   */  
-  glDrawArrays(GL_QUADS, 0, 24);
-
-
 
   if((error=glGetError()) != GL_NO_ERROR) {
     fprintf(stderr,"GL Error: %s\n",gluErrorString(error));

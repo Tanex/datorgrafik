@@ -1,4 +1,5 @@
 
+#include "glm/glm.hpp"
 /** Loads the sourcecode from the given file into the given
     (previously created) shader object. Performs a compilation and
     writes resulting info log to the corresponding logfile and if
