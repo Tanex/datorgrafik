@@ -1,0 +1,14 @@
+<map id="general.h" name="general.h">
+<area shape="rect" id="node2" href="$camera_8cc.html" title="Implements all methods for the Camera class. " alt="" coords="5,80,95,107"/>
+<area shape="rect" id="node3" href="$csg_8cc.html" title="Implements all methods for all CSG classes (Intersection, Inverse) " alt="" coords="119,80,181,107"/>
+<area shape="rect" id="node4" href="$light_8cc.html" title="Implements all methods for the Light class. " alt="" coords="206,80,273,107"/>
+<area shape="rect" id="node5" href="$main_8cc.html" title="The main entry point and code skeleton for a raytracer. " alt="" coords="297,80,369,107"/>
+<area shape="rect" id="node6" href="$material_8cc.html" title="Implements all methods for all materials (SimpleMaterial, CheckerboardMaterial, NoiseMaterial, MaterialMap). " alt="" coords="393,80,486,107"/>
+<area shape="rect" id="node7" href="$object_8cc.html" title="Implements all generic methods for all raytracable objects. " alt="" coords="511,80,589,107"/>
+<area shape="rect" id="node8" href="$plane_8cc.html" title="Implements all methods for the Plane class. " alt="" coords="614,80,689,107"/>
+<area shape="rect" id="node9" href="$raytracer_8cc.html" title="Implements the main raytracing functionality for the Raytracer class. " alt="" coords="713,80,811,107"/>
+<area shape="rect" id="node10" href="$referenced_8cc.html" title="Implements reference counters for all objects used by the raytracer via the ReferencedObject class..." alt="" coords="835,80,945,107"/>
+<area shape="rect" id="node11" href="$sphere_8cc.html" title="Implements all methods for the Sphere class. " alt="" coords="969,80,1053,107"/>
+<area shape="rect" id="node12" href="$transform_8cc.html" title="Implements all methods for the Transform class. " alt="" coords="1077,80,1180,107"/>
+<area shape="rect" id="node13" href="$vector_8cc.html" title="Implements some miscellaneous. " alt="" coords="1204,80,1283,107"/>
+</map>

@@ -1,0 +1,249 @@
+\section{noise.\+cc File Reference}
+\label{noise_8cc}\index{noise.\+cc@{noise.\+cc}}
+
+
+Implements functions for computing semi-\/random noise in 2-\/5 dimensions.  
+
+
+{\ttfamily \#include \char`\"{}noise.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stdlib.\+h\char`\"{}}\\*
+Include dependency graph for noise.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{noise_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf init\+Noise} ()
+\item 
+double {\bf semi\+Rand} (int x)
+\item 
+double {\bf semi\+Rand} (int x, int y)
+\item 
+double {\bf semi\+Rand} (int x, int y, int z)
+\item 
+double {\bf semi\+Rand} (int x, int y, int z, int w)
+\item 
+double {\bf semi\+Rand} (int x, int y, int z, int w, int h)
+\item 
+double {\bf noise} (double a)
+\item 
+double {\bf noise} (double a, double b)
+\item 
+double {\bf noise} (double a, double b, double c)
+\item 
+double {\bf noise} (double a, double b, double c, double d)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf rand\+Data} [5][1024]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements functions for computing semi-\/random noise in 2-\/5 dimensions. 
+
+
+
+Definition in file {\bf noise.\+cc}.
+
+
+
+\subsection{Function Documentation}
+\index{noise.\+cc@{noise.\+cc}!init\+Noise@{init\+Noise}}
+\index{init\+Noise@{init\+Noise}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{init\+Noise}]{\setlength{\rightskip}{0pt plus 5cm}void init\+Noise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{noise_8cc_a9299630a0ca23186b81dab1828bf5927}
+
+
+Definition at line 30 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+
+
+Referenced by main().
+
+\index{noise.\+cc@{noise.\+cc}!noise@{noise}}
+\index{noise@{noise}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{noise}]{\setlength{\rightskip}{0pt plus 5cm}double noise (
+\begin{DoxyParamCaption}
+\item[{double}]{a}
+\end{DoxyParamCaption}
+)}\label{noise_8cc_a428339e2af3692af4e843ffb1bf98191}
+
+
+Definition at line 52 of file noise.\+cc.
+
+
+
+References semi\+Rand().
+
+
+
+Referenced by Noise\+Material\+::get\+Lighting\+Properties(), and Material\+Map\+::get\+Lighting\+Properties().
+
+\index{noise.\+cc@{noise.\+cc}!noise@{noise}}
+\index{noise@{noise}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{noise}]{\setlength{\rightskip}{0pt plus 5cm}double noise (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b}
+\end{DoxyParamCaption}
+)}\label{noise_8cc_a88e8dfd1938c049c55aef61a169434cc}
+
+
+Definition at line 59 of file noise.\+cc.
+
+
+
+References semi\+Rand().
+
+\index{noise.\+cc@{noise.\+cc}!noise@{noise}}
+\index{noise@{noise}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{noise}]{\setlength{\rightskip}{0pt plus 5cm}double noise (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c}
+\end{DoxyParamCaption}
+)}\label{noise_8cc_a9ce7e9860aa196876c2f2b14ff0fc3c5}
+
+
+Definition at line 69 of file noise.\+cc.
+
+
+
+References semi\+Rand().
+
+\index{noise.\+cc@{noise.\+cc}!noise@{noise}}
+\index{noise@{noise}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{noise}]{\setlength{\rightskip}{0pt plus 5cm}double noise (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c, }
+\item[{double}]{d}
+\end{DoxyParamCaption}
+)}\label{noise_8cc_a6f052c9b1f6a59feaad72965623998ce}
+
+
+Definition at line 84 of file noise.\+cc.
+
+
+
+References semi\+Rand().
+
+\index{noise.\+cc@{noise.\+cc}!semi\+Rand@{semi\+Rand}}
+\index{semi\+Rand@{semi\+Rand}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{semi\+Rand}]{\setlength{\rightskip}{0pt plus 5cm}double semi\+Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{noise_8cc_afacdaeba96485f0c16b866715f5784f8}
+
+
+Definition at line 36 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+
+
+Referenced by noise().
+
+\index{noise.\+cc@{noise.\+cc}!semi\+Rand@{semi\+Rand}}
+\index{semi\+Rand@{semi\+Rand}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{semi\+Rand}]{\setlength{\rightskip}{0pt plus 5cm}double semi\+Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{noise_8cc_a93ff7fcabba013d8bb39343415c04e84}
+
+
+Definition at line 39 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+\index{noise.\+cc@{noise.\+cc}!semi\+Rand@{semi\+Rand}}
+\index{semi\+Rand@{semi\+Rand}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{semi\+Rand}]{\setlength{\rightskip}{0pt plus 5cm}double semi\+Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{noise_8cc_aae38f8baa10d1fd4d5c5fdfc126934d7}
+
+
+Definition at line 42 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+\index{noise.\+cc@{noise.\+cc}!semi\+Rand@{semi\+Rand}}
+\index{semi\+Rand@{semi\+Rand}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{semi\+Rand}]{\setlength{\rightskip}{0pt plus 5cm}double semi\+Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{z, }
+\item[{int}]{w}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{noise_8cc_a9a8ec4a421113dc3cb57a5a908cd27b3}
+
+
+Definition at line 45 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+\index{noise.\+cc@{noise.\+cc}!semi\+Rand@{semi\+Rand}}
+\index{semi\+Rand@{semi\+Rand}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{semi\+Rand}]{\setlength{\rightskip}{0pt plus 5cm}double semi\+Rand (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{z, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{noise_8cc_a72d8656f6222adb94bfc3b3dea79364a}
+
+
+Definition at line 48 of file noise.\+cc.
+
+
+
+References rand\+Data.
+
+
+
+\subsection{Variable Documentation}
+\index{noise.\+cc@{noise.\+cc}!rand\+Data@{rand\+Data}}
+\index{rand\+Data@{rand\+Data}!noise.\+cc@{noise.\+cc}}
+\subsubsection[{rand\+Data}]{\setlength{\rightskip}{0pt plus 5cm}int rand\+Data[5][1024]}\label{noise_8cc_a52301da5478980975ca1196d6e0e55e1}
+
+
+Definition at line 28 of file noise.\+cc.
+
+
+
+Referenced by init\+Noise(), and semi\+Rand().
+

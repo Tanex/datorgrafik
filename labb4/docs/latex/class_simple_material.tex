@@ -1,0 +1,118 @@
+\section{Simple\+Material Class Reference}
+\label{class_simple_material}\index{Simple\+Material@{Simple\+Material}}
+
+
+Implements a simple material with the same properties over all of the whole object.  
+
+
+
+
+{\ttfamily \#include $<$material.\+h$>$}
+
+
+
+Inheritance diagram for Simple\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_simple_material__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Simple\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{class_simple_material__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Simple\+Material} ({\bf Lighting\+Properties} $\ast$)
+\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Returns the lighting properites at a certain point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Lighting\+Properties} {\bf properties}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a simple material with the same properties over all of the whole object. 
+
+
+
+Definition at line 63 of file material.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Simple\+Material@{Simple\+Material}!Simple\+Material@{Simple\+Material}}
+\index{Simple\+Material@{Simple\+Material}!Simple\+Material@{Simple\+Material}}
+\subsubsection[{Simple\+Material}]{\setlength{\rightskip}{0pt plus 5cm}Simple\+Material\+::\+Simple\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Lighting\+Properties} $\ast$}]{props}
+\end{DoxyParamCaption}
+)}\label{class_simple_material_a5d5a83566122ec125585f53162dbeeca}
+
+
+Definition at line 31 of file material.\+cc.
+
+
+
+References properties.
+
+
+
+\subsection{Member Function Documentation}
+\index{Simple\+Material@{Simple\+Material}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Simple\+Material@{Simple\+Material}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Material\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_simple_material_a23e6ee14c9b9f1bd369023472f676168}
+
+
+Returns the lighting properites at a certain point. 
+
+Is also given the current normal at that point, and can modify it. 
+
+Implements {\bf Material} \doxyref{}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}.
+
+
+
+Definition at line 32 of file material.\+cc.
+
+
+
+References properties.
+
+
+
+\subsection{Member Data Documentation}
+\index{Simple\+Material@{Simple\+Material}!properties@{properties}}
+\index{properties@{properties}!Simple\+Material@{Simple\+Material}}
+\subsubsection[{properties}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lighting\+Properties} Simple\+Material\+::properties\hspace{0.3cm}{\ttfamily [private]}}\label{class_simple_material_a557a8159f52f4e69eb2336848bd6b77e}
+
+
+Definition at line 69 of file material.\+h.
+
+
+
+Referenced by get\+Lighting\+Properties(), and Simple\+Material().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf material.\+h}\item 
+{\bf material.\+cc}\end{DoxyCompactItemize}

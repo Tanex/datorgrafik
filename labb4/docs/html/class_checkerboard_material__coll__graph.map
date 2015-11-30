@@ -1,0 +1,5 @@
+<map id="CheckerboardMaterial" name="CheckerboardMaterial">
+<area shape="rect" id="node2" href="$class_material.html" title="Abstract base class for all materials. " alt="" coords="36,81,109,108"/>
+<area shape="rect" id="node3" href="$class_referenced_object.html" title="Base class for all objects which use a reference counter for memory management. " alt="" coords="5,5,140,32"/>
+<area shape="rect" id="node4" href="$class_lighting_properties.html" title="Stores lighting properties used for Phong lighting, reflections and transparancy. ..." alt="" coords="133,81,271,108"/>
+</map>

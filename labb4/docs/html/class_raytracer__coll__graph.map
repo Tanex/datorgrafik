@@ -1,0 +1,3 @@
+<map id="Raytracer" name="Raytracer">
+<area shape="rect" id="node2" href="$class_camera.html" title="Represents the camera and determines the point from which rays are cast in the scene. " alt="" coords="10,5,83,32"/>
+</map>

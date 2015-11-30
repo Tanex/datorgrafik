@@ -1,0 +1,199 @@
+\section{Plane Class Reference}
+\label{class_plane}\index{Plane@{Plane}}
+
+
+An infinite plane with given normal and offset from origo.  
+
+
+
+
+{\ttfamily \#include $<$plane.\+h$>$}
+
+
+
+Inheritance diagram for Plane\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_plane__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plane\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_plane__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Plane} (double {\bf normal}[3], double {\bf offset})
+\item 
+{\bf $\sim$\+Plane} ()
+\item 
+double {\bf line\+Test} (double origin[3], double direction[3], double max\+Distance)
+\begin{DoxyCompactList}\small\item\em Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. \end{DoxyCompactList}\item 
+void {\bf get\+Normal} (double point[3], double {\bf normal}[3])
+\begin{DoxyCompactList}\small\item\em Compute the normal of the object at the given point. \end{DoxyCompactList}\item 
+bool {\bf is\+Inside} (double point[3])
+\begin{DoxyCompactList}\small\item\em Tests if a point is inside the object or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf normal} [3]
+\item 
+double {\bf offset}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An infinite plane with given normal and offset from origo. 
+
+
+
+Definition at line 32 of file plane.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Plane@{Plane}!Plane@{Plane}}
+\index{Plane@{Plane}!Plane@{Plane}}
+\subsubsection[{Plane}]{\setlength{\rightskip}{0pt plus 5cm}Plane\+::\+Plane (
+\begin{DoxyParamCaption}
+\item[{double}]{normal[3], }
+\item[{double}]{offset}
+\end{DoxyParamCaption}
+)}\label{class_plane_a1db2a39c0d19550c86dd0c5c9474682e}
+
+
+Definition at line 27 of file plane.\+cc.
+
+
+
+References assign(), and offset.
+
+\index{Plane@{Plane}!````~Plane@{$\sim$\+Plane}}
+\index{````~Plane@{$\sim$\+Plane}!Plane@{Plane}}
+\subsubsection[{$\sim$\+Plane}]{\setlength{\rightskip}{0pt plus 5cm}Plane\+::$\sim$\+Plane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_plane_a69abd86051c880dcb44b249ad10c4436}
+
+
+Definition at line 31 of file plane.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Plane@{Plane}!get\+Normal@{get\+Normal}}
+\index{get\+Normal@{get\+Normal}!Plane@{Plane}}
+\subsubsection[{get\+Normal}]{\setlength{\rightskip}{0pt plus 5cm}void Plane\+::get\+Normal (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_plane_a323f52af3edd8c55ffd23324a61da5ec}
+
+
+Compute the normal of the object at the given point. 
+
+Result is not guaranteed to be of unit length. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a22c15ace5725e2577dbb187265bd3201}.
+
+
+
+Definition at line 48 of file plane.\+cc.
+
+
+
+References assign().
+
+\index{Plane@{Plane}!is\+Inside@{is\+Inside}}
+\index{is\+Inside@{is\+Inside}!Plane@{Plane}}
+\subsubsection[{is\+Inside}]{\setlength{\rightskip}{0pt plus 5cm}bool Plane\+::is\+Inside (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_plane_a905978138dff21894a040eebee557b16}
+
+
+Tests if a point is inside the object or not. 
+
+
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18}.
+
+
+
+Definition at line 52 of file plane.\+cc.
+
+
+
+References dot\+Product(), normal, and offset.
+
+\index{Plane@{Plane}!line\+Test@{line\+Test}}
+\index{line\+Test@{line\+Test}!Plane@{Plane}}
+\subsubsection[{line\+Test}]{\setlength{\rightskip}{0pt plus 5cm}double Plane\+::line\+Test (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{max\+Distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_plane_acec0051b3d12e8ddd1e475de3f4ad9de}
+
+
+Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. 
+
+Returns distance M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E if no such intersection exists.
+
+Direction is not neccessarily a vector of unit length, and distances are measured in multiples of this vector. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a1bfd7ffbccda28c67d8a537393113a7e}.
+
+
+
+Definition at line 33 of file plane.\+cc.
+
+
+
+References debug\+This\+Pixel, dot\+Product(), M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E, normal, offset, and print\+Debug\+Indentation().
+
+
+
+\subsection{Member Data Documentation}
+\index{Plane@{Plane}!normal@{normal}}
+\index{normal@{normal}!Plane@{Plane}}
+\subsubsection[{normal}]{\setlength{\rightskip}{0pt plus 5cm}double Plane\+::normal[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_plane_ad7347d52010f30316c0eca946b3d43e2}
+
+
+Definition at line 42 of file plane.\+h.
+
+
+
+Referenced by is\+Inside(), and line\+Test().
+
+\index{Plane@{Plane}!offset@{offset}}
+\index{offset@{offset}!Plane@{Plane}}
+\subsubsection[{offset}]{\setlength{\rightskip}{0pt plus 5cm}double Plane\+::offset\hspace{0.3cm}{\ttfamily [private]}}\label{class_plane_aa4fdb4c5c50553d97341b030cb900736}
+
+
+Definition at line 42 of file plane.\+h.
+
+
+
+Referenced by is\+Inside(), line\+Test(), and Plane().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf plane.\+h}\item 
+{\bf plane.\+cc}\end{DoxyCompactItemize}

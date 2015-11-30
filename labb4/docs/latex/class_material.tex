@@ -1,0 +1,91 @@
+\section{Material Class Reference}
+\label{class_material}\index{Material@{Material}}
+
+
+Abstract base class for all materials.  
+
+
+
+
+{\ttfamily \#include $<$material.\+h$>$}
+
+
+
+Inheritance diagram for Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_material__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_material__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Material} ()
+\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])=0
+\begin{DoxyCompactList}\small\item\em Returns the lighting properites at a certain point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for all materials. 
+
+These objects are used to compute the lighting properties for any specific point in the scene using the virtual function \doxyref{Material\+::get\+Lighting\+Properties()}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}. 
+
+Definition at line 51 of file material.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Material@{Material}!Material@{Material}}
+\index{Material@{Material}!Material@{Material}}
+\subsubsection[{Material}]{\setlength{\rightskip}{0pt plus 5cm}Material\+::\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_material_a137e987401b63eb7c6c27c3e38bc74b5}
+
+
+Definition at line 29 of file material.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Material@{Material}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Material@{Material}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Material\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{class_material_ab61e7df6a740ad2ad3a82700005982bd}
+
+
+Returns the lighting properites at a certain point. 
+
+Is also given the current normal at that point, and can modify it. 
+
+Implemented in {\bf Material\+Map} \doxyref{}{p.}{class_material_map_abd631c6e7b36737bcaadffbf47ca60aa}, {\bf Noise\+Material} \doxyref{}{p.}{class_noise_material_a07c6bb884031fea88df86e8d9fd85bec}, {\bf Checkerboard\+Material} \doxyref{}{p.}{class_checkerboard_material_a1fd16339705d7653381e72ee3d188613}, {\bf Inverse} \doxyref{}{p.}{class_inverse_abedf66c2607143f237f913187ecfdc40}, {\bf Simple\+Material} \doxyref{}{p.}{class_simple_material_a23e6ee14c9b9f1bd369023472f676168}, {\bf Object} \doxyref{}{p.}{class_object_a510171215bdf364cc0bf8f72336039b9}, {\bf Transform} \doxyref{}{p.}{class_transform_a6759fe52b87d9113c48c0414824ac067}, and {\bf Intersection} \doxyref{}{p.}{class_intersection_aeaf604c0cdbef2d4c2a0f2087287ead8}.
+
+
+
+Referenced by Transform\+::get\+Lighting\+Properties(), and Object\+::get\+Lighting\+Properties().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf material.\+h}\item 
+{\bf material.\+cc}\end{DoxyCompactItemize}

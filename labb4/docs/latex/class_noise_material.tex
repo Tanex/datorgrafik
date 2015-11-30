@@ -1,0 +1,93 @@
+\section{Noise\+Material Class Reference}
+\label{class_noise_material}\index{Noise\+Material@{Noise\+Material}}
+
+
+Creates gray noise all over the object.  
+
+
+
+
+{\ttfamily \#include $<$material.\+h$>$}
+
+
+
+Inheritance diagram for Noise\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_noise_material__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Noise\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_noise_material__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Noise\+Material} ()
+\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Returns the lighting properites at a certain point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Creates gray noise all over the object. 
+
+Definition at line 86 of file material.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Noise\+Material@{Noise\+Material}!Noise\+Material@{Noise\+Material}}
+\index{Noise\+Material@{Noise\+Material}!Noise\+Material@{Noise\+Material}}
+\subsubsection[{Noise\+Material}]{\setlength{\rightskip}{0pt plus 5cm}Noise\+Material\+::\+Noise\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_noise_material_a2efd145d8fadf508f44e686cb1ffaacf}
+
+
+Definition at line 46 of file material.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Noise\+Material@{Noise\+Material}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Noise\+Material@{Noise\+Material}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Noise\+Material\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_noise_material_a07c6bb884031fea88df86e8d9fd85bec}
+
+
+Returns the lighting properites at a certain point. 
+
+Is also given the current normal at that point, and can modify it. 
+
+Implements {\bf Material} \doxyref{}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}.
+
+
+
+Definition at line 47 of file material.\+cc.
+
+
+
+References Lighting\+Properties\+::ambient, Lighting\+Properties\+::diffuse, noise(), Lighting\+Properties\+::reflection, Lighting\+Properties\+::shininess, Lighting\+Properties\+::specular, and zero().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf material.\+h}\item 
+{\bf material.\+cc}\end{DoxyCompactItemize}

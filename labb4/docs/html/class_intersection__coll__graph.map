@@ -1,0 +1,5 @@
+<map id="Intersection" name="Intersection">
+<area shape="rect" id="node2" href="$class_object.html" title="Abstract base class for all renderable objects. " alt="" coords="41,171,104,197"/>
+<area shape="rect" id="node3" href="$class_material.html" title="Abstract base class for all materials. " alt="" coords="36,81,109,108"/>
+<area shape="rect" id="node4" href="$class_referenced_object.html" title="Base class for all objects which use a reference counter for memory management. " alt="" coords="5,5,140,32"/>
+</map>

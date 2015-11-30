@@ -1,0 +1,133 @@
+\section{Checkerboard\+Material Class Reference}
+\label{class_checkerboard_material}\index{Checkerboard\+Material@{Checkerboard\+Material}}
+
+
+A checkerboard pattern material.  
+
+
+
+
+{\ttfamily \#include $<$material.\+h$>$}
+
+
+
+Inheritance diagram for Checkerboard\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_checkerboard_material__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Checkerboard\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{class_checkerboard_material__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Checkerboard\+Material} (double {\bf size}, {\bf Lighting\+Properties} $\ast$, {\bf Lighting\+Properties} $\ast$)
+\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Returns the lighting properites at a certain point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf size}
+\item 
+{\bf Lighting\+Properties} {\bf properties} [2]
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A checkerboard pattern material. 
+
+Requires checkerboard size and two sets of properties. 
+
+Definition at line 75 of file material.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Checkerboard\+Material@{Checkerboard\+Material}!Checkerboard\+Material@{Checkerboard\+Material}}
+\index{Checkerboard\+Material@{Checkerboard\+Material}!Checkerboard\+Material@{Checkerboard\+Material}}
+\subsubsection[{Checkerboard\+Material}]{\setlength{\rightskip}{0pt plus 5cm}Checkerboard\+Material\+::\+Checkerboard\+Material (
+\begin{DoxyParamCaption}
+\item[{double}]{size, }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props\+A, }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props\+B}
+\end{DoxyParamCaption}
+)}\label{class_checkerboard_material_ae8ae0357838edb4f4ae27da273b7819f}
+
+
+Definition at line 35 of file material.\+cc.
+
+
+
+References properties, and size.
+
+
+
+\subsection{Member Function Documentation}
+\index{Checkerboard\+Material@{Checkerboard\+Material}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Checkerboard\+Material@{Checkerboard\+Material}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Checkerboard\+Material\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_checkerboard_material_a1fd16339705d7653381e72ee3d188613}
+
+
+Returns the lighting properites at a certain point. 
+
+Is also given the current normal at that point, and can modify it. 
+
+Implements {\bf Material} \doxyref{}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}.
+
+
+
+Definition at line 42 of file material.\+cc.
+
+
+
+References properties, and size.
+
+
+
+\subsection{Member Data Documentation}
+\index{Checkerboard\+Material@{Checkerboard\+Material}!properties@{properties}}
+\index{properties@{properties}!Checkerboard\+Material@{Checkerboard\+Material}}
+\subsubsection[{properties}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lighting\+Properties} Checkerboard\+Material\+::properties[2]\hspace{0.3cm}{\ttfamily [private]}}\label{class_checkerboard_material_a02fdbb9c4d5aeca8e3f00d3bf4919d48}
+
+
+Definition at line 82 of file material.\+h.
+
+
+
+Referenced by Checkerboard\+Material(), and get\+Lighting\+Properties().
+
+\index{Checkerboard\+Material@{Checkerboard\+Material}!size@{size}}
+\index{size@{size}!Checkerboard\+Material@{Checkerboard\+Material}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}double Checkerboard\+Material\+::size\hspace{0.3cm}{\ttfamily [private]}}\label{class_checkerboard_material_a956d7bc460529a215a868c0ab9a4f806}
+
+
+Definition at line 81 of file material.\+h.
+
+
+
+Referenced by Checkerboard\+Material(), and get\+Lighting\+Properties().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf material.\+h}\item 
+{\bf material.\+cc}\end{DoxyCompactItemize}

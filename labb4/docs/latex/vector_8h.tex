@@ -1,0 +1,459 @@
+\section{vector.\+h File Reference}
+\label{vector_8h}\index{vector.\+h@{vector.\+h}}
+
+
+Declares some miscellaneous.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vector_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef double {\bf Matrix4d} [4][4]
+\item 
+typedef double {\bf Matrix3d} [3][3]
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf assign} (const float A[3], float C[3])
+\item 
+void {\bf assign} (const double A[3], double C[3])
+\item 
+void {\bf cross\+Product} (const double A[3], const double B[3], double C[3])
+\item 
+double {\bf dot\+Product} (const double A[3], const double B[3])
+\item 
+void {\bf add} (const double A[3], const double B[3], double C[3])
+\item 
+void {\bf sub} (const double A[3], const double B[3], double C[3])
+\item 
+void {\bf normalize} (double[3])
+\item 
+double {\bf length} (double[3])
+\item 
+void {\bf zero} (double[3])
+\item 
+void {\bf debug\+Matrix} ({\bf Matrix4d})
+\begin{DoxyCompactList}\small\item\em Print out a matrix in a human readable form. \end{DoxyCompactList}\item 
+void {\bf homogenise} (double A[4], double C[3])
+\begin{DoxyCompactList}\small\item\em Homogeneis A and assign to C. \end{DoxyCompactList}\item 
+void {\bf use\+Matrix} ({\bf Matrix4d} M, const double A[4], double C[4])
+\begin{DoxyCompactList}\small\item\em Assign to C the value M $\ast$ A. \end{DoxyCompactList}\item 
+void {\bf use\+Matrix} ({\bf Matrix3d}, const double A[3], double C[3])
+\begin{DoxyCompactList}\small\item\em Assign to C the value M $\ast$ A. \end{DoxyCompactList}\item 
+void {\bf use\+Matrix} ({\bf Matrix4d} A, const double x, const double y, const double z, double C[3])
+\begin{DoxyCompactList}\small\item\em Assign to C the value M $\ast$ $<$x,y,z$>$ \end{DoxyCompactList}\item 
+void {\bf use\+Matrix} ({\bf Matrix4d} A, const double x, const double y, const double z, float C[3])
+\begin{DoxyCompactList}\small\item\em Assign to C the value M $\ast$ $<$x,y,z$>$ \end{DoxyCompactList}\item 
+void {\bf identity\+Matrix} ({\bf Matrix4d})
+\item 
+void {\bf assign} (const {\bf Matrix4d} A, {\bf Matrix4d} C)
+\item 
+void {\bf matrix\+Mult} ({\bf Matrix4d} A, {\bf Matrix4d} B, {\bf Matrix4d} C)
+\item 
+void {\bf rotate\+Matrix\+X} (double, {\bf Matrix4d})
+\item 
+void {\bf rotate\+Matrix\+Y} (double, {\bf Matrix4d})
+\item 
+void {\bf rotate\+Matrix\+Z} (double, {\bf Matrix4d})
+\item 
+void {\bf translate\+X\+Y\+Z} (double x, double y, double z, {\bf Matrix4d})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Declares some miscellaneous. 
+
+math vector/matrix operations. 
+
+Definition in file {\bf vector.\+h}.
+
+
+
+\subsection{Typedef Documentation}
+\index{vector.\+h@{vector.\+h}!Matrix3d@{Matrix3d}}
+\index{Matrix3d@{Matrix3d}!vector.\+h@{vector.\+h}}
+\subsubsection[{Matrix3d}]{\setlength{\rightskip}{0pt plus 5cm}typedef double Matrix3d[3][3]}\label{vector_8h_afce00a7cad1c8490e0ab1ecdcf079e46}
+
+
+Definition at line 38 of file vector.\+h.
+
+\index{vector.\+h@{vector.\+h}!Matrix4d@{Matrix4d}}
+\index{Matrix4d@{Matrix4d}!vector.\+h@{vector.\+h}}
+\subsubsection[{Matrix4d}]{\setlength{\rightskip}{0pt plus 5cm}typedef double Matrix4d[4][4]}\label{vector_8h_abcd83e68e1fa313de571ac1d30cf2488}
+
+
+Definition at line 37 of file vector.\+h.
+
+
+
+\subsection{Function Documentation}
+\index{vector.\+h@{vector.\+h}!add@{add}}
+\index{add@{add}!vector.\+h@{vector.\+h}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void add (
+\begin{DoxyParamCaption}
+\item[{const double}]{A[3], }
+\item[{const double}]{B[3], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_ab857ae51cb219acd3215c72b632e1ca1}
+
+
+Definition at line 33 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!assign@{assign}}
+\index{assign@{assign}!vector.\+h@{vector.\+h}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void assign (
+\begin{DoxyParamCaption}
+\item[{const float}]{A[3], }
+\item[{float}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a53c132865e39e6c608d18c0adaad7f9d}
+
+
+Definition at line 149 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!assign@{assign}}
+\index{assign@{assign}!vector.\+h@{vector.\+h}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void assign (
+\begin{DoxyParamCaption}
+\item[{const double}]{A[3], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a415ccce4f7df55b93408b27871807ba5}
+
+
+Definition at line 146 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!assign@{assign}}
+\index{assign@{assign}!vector.\+h@{vector.\+h}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void assign (
+\begin{DoxyParamCaption}
+\item[{const {\bf Matrix4d}}]{A, }
+\item[{{\bf Matrix4d}}]{C}
+\end{DoxyParamCaption}
+)}\label{vector_8h_ae3e07fa99d972082756ecc59df6aa880}
+
+
+Definition at line 138 of file vector.\+cc.
+
+
+
+Referenced by Plane\+::get\+Normal(), Sphere\+::get\+Normal(), Transform\+::get\+Normal(), Camera\+::get\+Pixel\+Ray(), Light\+::\+Light(), Intersection\+::line\+Test(), Plane\+::\+Plane(), rotate\+Matrix\+X(), rotate\+Matrix\+Y(), rotate\+Matrix\+Z(), Transform\+::scale(), Raytracer\+::set\+Ambient\+Light(), Raytracer\+::set\+Background(), Camera\+::set\+Forward(), Camera\+::set\+Origin(), Camera\+::set\+Right(), Camera\+::set\+Up(), Transform\+::translate(), and translate\+X\+Y\+Z().
+
+\index{vector.\+h@{vector.\+h}!cross\+Product@{cross\+Product}}
+\index{cross\+Product@{cross\+Product}!vector.\+h@{vector.\+h}}
+\subsubsection[{cross\+Product}]{\setlength{\rightskip}{0pt plus 5cm}void cross\+Product (
+\begin{DoxyParamCaption}
+\item[{const double}]{A[3], }
+\item[{const double}]{B[3], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a28db7f272927a82733e31e964c0137fc}
+
+
+Definition at line 51 of file vector.\+cc.
+
+
+
+Referenced by Camera\+::set\+Focus().
+
+\index{vector.\+h@{vector.\+h}!debug\+Matrix@{debug\+Matrix}}
+\index{debug\+Matrix@{debug\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{debug\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void debug\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a8a9c59170c37a66bcce2e6d5f3a39710}
+
+
+Print out a matrix in a human readable form. 
+
+
+
+Definition at line 66 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!dot\+Product@{dot\+Product}}
+\index{dot\+Product@{dot\+Product}!vector.\+h@{vector.\+h}}
+\subsubsection[{dot\+Product}]{\setlength{\rightskip}{0pt plus 5cm}double dot\+Product (
+\begin{DoxyParamCaption}
+\item[{const double}]{A[3], }
+\item[{const double}]{B[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_ae7b1006834d412eb2a8ca1af92e767a5}
+
+
+Definition at line 58 of file vector.\+cc.
+
+
+
+Referenced by Plane\+::is\+Inside(), Sphere\+::is\+Inside(), Plane\+::line\+Test(), Sphere\+::line\+Test(), Raytracer\+::raytrace(), and Camera\+::set\+Focus().
+
+\index{vector.\+h@{vector.\+h}!homogenise@{homogenise}}
+\index{homogenise@{homogenise}!vector.\+h@{vector.\+h}}
+\subsubsection[{homogenise}]{\setlength{\rightskip}{0pt plus 5cm}void homogenise (
+\begin{DoxyParamCaption}
+\item[{double}]{A[4], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a30c57bce7cfe7b00bb69e776a4d1823c}
+
+
+Homogeneis A and assign to C. 
+
+
+
+Definition at line 84 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!identity\+Matrix@{identity\+Matrix}}
+\index{identity\+Matrix@{identity\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{identity\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void identity\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_aa3bf646ad98730f5e2f6ebc2e6c066a2}
+
+
+Definition at line 151 of file vector.\+cc.
+
+
+
+Referenced by Transform\+::identity(), Transform\+::scale(), Transform\+::\+Transform(), and Transform\+::translate().
+
+\index{vector.\+h@{vector.\+h}!length@{length}}
+\index{length@{length}!vector.\+h@{vector.\+h}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}double length (
+\begin{DoxyParamCaption}
+\item[{double}]{[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a36607aa9df66115bb7ccdf7108ed5a1e}
+
+
+Definition at line 47 of file vector.\+cc.
+
+
+
+Referenced by Raytracer\+::raytrace().
+
+\index{vector.\+h@{vector.\+h}!matrix\+Mult@{matrix\+Mult}}
+\index{matrix\+Mult@{matrix\+Mult}!vector.\+h@{vector.\+h}}
+\subsubsection[{matrix\+Mult}]{\setlength{\rightskip}{0pt plus 5cm}void matrix\+Mult (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{A, }
+\item[{{\bf Matrix4d}}]{B, }
+\item[{{\bf Matrix4d}}]{C}
+\end{DoxyParamCaption}
+)}\label{vector_8h_ab1b2739c93969f3de02fedba918251ba}
+
+
+Definition at line 74 of file vector.\+cc.
+
+
+
+Referenced by rotate\+Matrix\+X(), rotate\+Matrix\+Y(), rotate\+Matrix\+Z(), Transform\+::scale(), Transform\+::translate(), and translate\+X\+Y\+Z().
+
+\index{vector.\+h@{vector.\+h}!normalize@{normalize}}
+\index{normalize@{normalize}!vector.\+h@{vector.\+h}}
+\subsubsection[{normalize}]{\setlength{\rightskip}{0pt plus 5cm}void normalize (
+\begin{DoxyParamCaption}
+\item[{double}]{[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a4c5d25cc14b7636ed3a0e3a91a8988c6}
+
+
+Definition at line 42 of file vector.\+cc.
+
+
+
+Referenced by Camera\+::get\+Pixel\+Ray(), Raytracer\+::raytrace(), Camera\+::set\+Focus(), Camera\+::set\+Forward(), Camera\+::set\+Right(), and Camera\+::set\+Up().
+
+\index{vector.\+h@{vector.\+h}!rotate\+Matrix\+X@{rotate\+Matrix\+X}}
+\index{rotate\+Matrix\+X@{rotate\+Matrix\+X}!vector.\+h@{vector.\+h}}
+\subsubsection[{rotate\+Matrix\+X}]{\setlength{\rightskip}{0pt plus 5cm}void rotate\+Matrix\+X (
+\begin{DoxyParamCaption}
+\item[{double}]{, }
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a28ec105d9f4fffd58e609f401c7d006c}
+
+
+Definition at line 158 of file vector.\+cc.
+
+
+
+References assign(), and matrix\+Mult().
+
+
+
+Referenced by Transform\+::rotate\+X().
+
+\index{vector.\+h@{vector.\+h}!rotate\+Matrix\+Y@{rotate\+Matrix\+Y}}
+\index{rotate\+Matrix\+Y@{rotate\+Matrix\+Y}!vector.\+h@{vector.\+h}}
+\subsubsection[{rotate\+Matrix\+Y}]{\setlength{\rightskip}{0pt plus 5cm}void rotate\+Matrix\+Y (
+\begin{DoxyParamCaption}
+\item[{double}]{, }
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a540872db534c4b4847217723177e1607}
+
+
+Definition at line 168 of file vector.\+cc.
+
+
+
+References assign(), and matrix\+Mult().
+
+
+
+Referenced by Transform\+::rotate\+Y().
+
+\index{vector.\+h@{vector.\+h}!rotate\+Matrix\+Z@{rotate\+Matrix\+Z}}
+\index{rotate\+Matrix\+Z@{rotate\+Matrix\+Z}!vector.\+h@{vector.\+h}}
+\subsubsection[{rotate\+Matrix\+Z}]{\setlength{\rightskip}{0pt plus 5cm}void rotate\+Matrix\+Z (
+\begin{DoxyParamCaption}
+\item[{double}]{, }
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a8ed22b97c71fcb188b3616482edf6ab0}
+
+
+Definition at line 178 of file vector.\+cc.
+
+
+
+References assign(), and matrix\+Mult().
+
+
+
+Referenced by Transform\+::rotate\+Z().
+
+\index{vector.\+h@{vector.\+h}!sub@{sub}}
+\index{sub@{sub}!vector.\+h@{vector.\+h}}
+\subsubsection[{sub}]{\setlength{\rightskip}{0pt plus 5cm}void sub (
+\begin{DoxyParamCaption}
+\item[{const double}]{A[3], }
+\item[{const double}]{B[3], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a0bc34e56ee39849595001a428f7d464c}
+
+
+Definition at line 38 of file vector.\+cc.
+
+
+
+Referenced by Raytracer\+::raytrace(), and Camera\+::set\+Focus().
+
+\index{vector.\+h@{vector.\+h}!translate\+X\+Y\+Z@{translate\+X\+Y\+Z}}
+\index{translate\+X\+Y\+Z@{translate\+X\+Y\+Z}!vector.\+h@{vector.\+h}}
+\subsubsection[{translate\+X\+Y\+Z}]{\setlength{\rightskip}{0pt plus 5cm}void translate\+X\+Y\+Z (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z, }
+\item[{{\bf Matrix4d}}]{}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a640090dda94f00b0c96e8a122ea8bd6a}
+
+
+Definition at line 188 of file vector.\+cc.
+
+
+
+References assign(), and matrix\+Mult().
+
+\index{vector.\+h@{vector.\+h}!use\+Matrix@{use\+Matrix}}
+\index{use\+Matrix@{use\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{use\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void use\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{M, }
+\item[{const double}]{A[4], }
+\item[{double}]{C[4]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_af3ad782c60edf3478d111278ad47b214}
+
+
+Assign to C the value M $\ast$ A. 
+
+
+
+Definition at line 91 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!use\+Matrix@{use\+Matrix}}
+\index{use\+Matrix@{use\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{use\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void use\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix3d}}]{, }
+\item[{const double}]{A[3], }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_aaf48d32f287d731b52e7561d2a231b44}
+
+
+Assign to C the value M $\ast$ A. 
+
+
+
+Definition at line 102 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!use\+Matrix@{use\+Matrix}}
+\index{use\+Matrix@{use\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{use\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void use\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{A, }
+\item[{const double}]{x, }
+\item[{const double}]{y, }
+\item[{const double}]{z, }
+\item[{double}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_ad788676f93dd084ac8cf72b8786521c6}
+
+
+Assign to C the value M $\ast$ $<$x,y,z$>$ 
+
+
+
+Definition at line 114 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!use\+Matrix@{use\+Matrix}}
+\index{use\+Matrix@{use\+Matrix}!vector.\+h@{vector.\+h}}
+\subsubsection[{use\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void use\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix4d}}]{A, }
+\item[{const double}]{x, }
+\item[{const double}]{y, }
+\item[{const double}]{z, }
+\item[{float}]{C[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a185ea64a70907f73742a04a66e1bb8df}
+
+
+Assign to C the value M $\ast$ $<$x,y,z$>$ 
+
+
+
+Definition at line 126 of file vector.\+cc.
+
+\index{vector.\+h@{vector.\+h}!zero@{zero}}
+\index{zero@{zero}!vector.\+h@{vector.\+h}}
+\subsubsection[{zero}]{\setlength{\rightskip}{0pt plus 5cm}void zero (
+\begin{DoxyParamCaption}
+\item[{double}]{[3]}
+\end{DoxyParamCaption}
+)}\label{vector_8h_a9086a89f75db64fcbcde743fdb7a027f}
+
+
+Definition at line 199 of file vector.\+cc.
+
+
+
+Referenced by Camera\+::\+Camera(), do\+Redraw(), Noise\+Material\+::get\+Lighting\+Properties(), Material\+Map\+::get\+Lighting\+Properties(), and Raytracer\+::\+Raytracer().
+

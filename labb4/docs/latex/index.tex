@@ -1,0 +1,9 @@
+This lab skeleton consisitutes of a a simple raytracer with a few primitive classes for different objects and materials. Although, or perhaps because of, it is a rather simplistic raytracer, modern computers are fast enough to render the simple example scenes used here more or less in realtime.
+
+In order to create and render a scene a scenegraph is created by adding objects (raytracer\+::add\+Object) to the raytracer. Since many objects can contain other objects (eg. \doxyref{Transform}{p.}{class_transform} objects or \doxyref{Intersection}{p.}{class_intersection} objects) this creates a hierarchical graph of objects. To have animated and interactive scenes, the main program must create the scenes and later change properties of them between different frames to create the illustion of animation. One example is by eg. modifying the translation values of a translation object contanining other objects.
+
+For documentation of the different available primitive objects see the class hierarchy. For examples on how to use the raytracer see the existing skeleton code in \doxyref{main.\+cc}{p.}{main_8cc}
+
+The raytracer uses multiple threads to render a scene with as many processors as are available on the local machine as possible. See the variable n\+Threads to change this manually.
+
+To start, see the {\tt class list } or {\tt class hierarchy }. 

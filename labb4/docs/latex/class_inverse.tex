@@ -1,0 +1,192 @@
+\section{Inverse Class Reference}
+\label{class_inverse}\index{Inverse@{Inverse}}
+
+
+Creates the inverse of an object by negating the \doxyref{Object\+::is\+Inside}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18} and Object\+::\+Get\+Normal functions.  
+
+
+
+
+{\ttfamily \#include $<$csg.\+h$>$}
+
+
+
+Inheritance diagram for Inverse\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_inverse__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Inverse\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_inverse__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Inverse} ({\bf Object} $\ast$)
+\item 
+{\bf $\sim$\+Inverse} ()
+\item 
+double {\bf line\+Test} (double origin[3], double direction[3], double max\+Distance)
+\begin{DoxyCompactList}\small\item\em Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. \end{DoxyCompactList}\item 
+void {\bf get\+Normal} (double point[3], double normal[3])
+\begin{DoxyCompactList}\small\item\em Compute the normal of the object at the given point. \end{DoxyCompactList}\item 
+bool {\bf is\+Inside} (double point[3])
+\begin{DoxyCompactList}\small\item\em Tests if a point is inside the object or not. \end{DoxyCompactList}\item 
+void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Default material handling that queries the default material given for this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Object} $\ast$ {\bf object}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Creates the inverse of an object by negating the \doxyref{Object\+::is\+Inside}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18} and Object\+::\+Get\+Normal functions. 
+
+
+
+Definition at line 58 of file csg.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Inverse@{Inverse}!Inverse@{Inverse}}
+\index{Inverse@{Inverse}!Inverse@{Inverse}}
+\subsubsection[{Inverse}]{\setlength{\rightskip}{0pt plus 5cm}Inverse\+::\+Inverse (
+\begin{DoxyParamCaption}
+\item[{{\bf Object} $\ast$}]{o}
+\end{DoxyParamCaption}
+)}\label{class_inverse_ab465fd57124caf679827ec3dddabe2ea}
+
+
+Definition at line 148 of file csg.\+cc.
+
+
+
+References Referenced\+Object\+::reference().
+
+\index{Inverse@{Inverse}!````~Inverse@{$\sim$\+Inverse}}
+\index{````~Inverse@{$\sim$\+Inverse}!Inverse@{Inverse}}
+\subsubsection[{$\sim$\+Inverse}]{\setlength{\rightskip}{0pt plus 5cm}Inverse\+::$\sim$\+Inverse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_inverse_a21add8a55de3e5c898701e0a22a12cc1}
+
+
+Definition at line 149 of file csg.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Inverse@{Inverse}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Inverse@{Inverse}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Inverse\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_inverse_abedf66c2607143f237f913187ecfdc40}
+
+
+Default material handling that queries the default material given for this object. 
+
+
+
+Reimplemented from {\bf Object} \doxyref{}{p.}{class_object_a510171215bdf364cc0bf8f72336039b9}.
+
+
+
+Definition at line 161 of file csg.\+cc.
+
+\index{Inverse@{Inverse}!get\+Normal@{get\+Normal}}
+\index{get\+Normal@{get\+Normal}!Inverse@{Inverse}}
+\subsubsection[{get\+Normal}]{\setlength{\rightskip}{0pt plus 5cm}void Inverse\+::get\+Normal (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_inverse_aead295a76d1bd7d8478fc0e32710c84f}
+
+
+Compute the normal of the object at the given point. 
+
+Result is not guaranteed to be of unit length. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a22c15ace5725e2577dbb187265bd3201}.
+
+
+
+Definition at line 153 of file csg.\+cc.
+
+\index{Inverse@{Inverse}!is\+Inside@{is\+Inside}}
+\index{is\+Inside@{is\+Inside}!Inverse@{Inverse}}
+\subsubsection[{is\+Inside}]{\setlength{\rightskip}{0pt plus 5cm}bool Inverse\+::is\+Inside (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_inverse_af3747e94047e18d4eff0fc61a92bf915}
+
+
+Tests if a point is inside the object or not. 
+
+
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18}.
+
+
+
+Definition at line 158 of file csg.\+cc.
+
+\index{Inverse@{Inverse}!line\+Test@{line\+Test}}
+\index{line\+Test@{line\+Test}!Inverse@{Inverse}}
+\subsubsection[{line\+Test}]{\setlength{\rightskip}{0pt plus 5cm}double Inverse\+::line\+Test (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{max\+Distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_inverse_a7cd665a12ccf90142526965dfe416d1f}
+
+
+Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. 
+
+Returns distance M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E if no such intersection exists.
+
+Direction is not neccessarily a vector of unit length, and distances are measured in multiples of this vector. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a1bfd7ffbccda28c67d8a537393113a7e}.
+
+
+
+Definition at line 150 of file csg.\+cc.
+
+
+
+\subsection{Member Data Documentation}
+\index{Inverse@{Inverse}!object@{object}}
+\index{object@{object}!Inverse@{Inverse}}
+\subsubsection[{object}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object}$\ast$ Inverse\+::object\hspace{0.3cm}{\ttfamily [private]}}\label{class_inverse_a744f471528f6830a87d04d3e88fd38c1}
+
+
+Definition at line 69 of file csg.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf csg.\+h}\item 
+{\bf csg.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,244 @@
+\section{Object Class Reference}
+\label{class_object}\index{Object@{Object}}
+
+
+Abstract base class for all renderable objects.  
+
+
+
+
+{\ttfamily \#include $<$object.\+h$>$}
+
+
+
+Inheritance diagram for Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_object__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Object} ()
+\item 
+virtual {\bf $\sim$\+Object} ()=0
+\begin{DoxyCompactList}\small\item\em All objects must have a virtual destructor so that they can be deallocated properly and to dereference any contained objects. \end{DoxyCompactList}\item 
+virtual double {\bf line\+Test} (double origin[3], double direction[3], double max\+Distance)=0
+\begin{DoxyCompactList}\small\item\em Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. \end{DoxyCompactList}\item 
+virtual void {\bf get\+Normal} (double point[3], double normal[3])=0
+\begin{DoxyCompactList}\small\item\em Compute the normal of the object at the given point. \end{DoxyCompactList}\item 
+virtual bool {\bf is\+Inside} (double point[3])=0
+\begin{DoxyCompactList}\small\item\em Tests if a point is inside the object or not. \end{DoxyCompactList}\item 
+virtual void {\bf set\+Material} ({\bf Material} $\ast${\bf material})
+\begin{DoxyCompactList}\small\item\em Sets up a default material to use for this object. \end{DoxyCompactList}\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Default material handling that queries the default material given for this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Material} $\ast$ {\bf material}
+\begin{DoxyCompactList}\small\item\em \doxyref{Material}{p.}{class_material} used by the default get\+Lighting\+Properties function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for all renderable objects. 
+
+Each concrete instance of this class must contain virtual functions that are used to perform line tests, computing normals and lighting properties. 
+
+Definition at line 39 of file object.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Object@{Object}!Object@{Object}}
+\index{Object@{Object}!Object@{Object}}
+\subsubsection[{Object}]{\setlength{\rightskip}{0pt plus 5cm}Object\+::\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_object_a40860402e64d8008fb42329df7097cdb}
+
+
+Definition at line 29 of file object.\+cc.
+
+
+
+References material.
+
+\index{Object@{Object}!````~Object@{$\sim$\+Object}}
+\index{````~Object@{$\sim$\+Object}!Object@{Object}}
+\subsubsection[{$\sim$\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Object\+::$\sim$\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{class_object_a6345bacd6b9d1e2814db2dc178f68716}
+
+
+All objects must have a virtual destructor so that they can be deallocated properly and to dereference any contained objects. 
+
+
+
+Definition at line 30 of file object.\+cc.
+
+
+
+References Referenced\+Object\+::dereference(), and material.
+
+
+
+\subsection{Member Function Documentation}
+\index{Object@{Object}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Object@{Object}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_object_a510171215bdf364cc0bf8f72336039b9}
+
+
+Default material handling that queries the default material given for this object. 
+
+
+
+Implements {\bf Material} \doxyref{}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}.
+
+
+
+Reimplemented in {\bf Inverse} \doxyref{}{p.}{class_inverse_abedf66c2607143f237f913187ecfdc40}, {\bf Transform} \doxyref{}{p.}{class_transform_a6759fe52b87d9113c48c0414824ac067}, and {\bf Intersection} \doxyref{}{p.}{class_intersection_aeaf604c0cdbef2d4c2a0f2087287ead8}.
+
+
+
+Definition at line 36 of file object.\+cc.
+
+
+
+References Material\+::get\+Lighting\+Properties(), and material.
+
+
+
+Referenced by Transform\+::get\+Lighting\+Properties(), and Raytracer\+::raytrace().
+
+\index{Object@{Object}!get\+Normal@{get\+Normal}}
+\index{get\+Normal@{get\+Normal}!Object@{Object}}
+\subsubsection[{get\+Normal}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Object\+::get\+Normal (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{class_object_a22c15ace5725e2577dbb187265bd3201}
+
+
+Compute the normal of the object at the given point. 
+
+Result is not guaranteed to be of unit length. 
+
+Implemented in {\bf Inverse} \doxyref{}{p.}{class_inverse_aead295a76d1bd7d8478fc0e32710c84f}, {\bf Intersection} \doxyref{}{p.}{class_intersection_aca5201537e1f12305142be681b0e0b47}, {\bf Transform} \doxyref{}{p.}{class_transform_ab9b4a86bde00d015be3ee563a072ceeb}, {\bf Sphere} \doxyref{}{p.}{class_sphere_a36b26e53cef4b521c97df51fac315c68}, and {\bf Plane} \doxyref{}{p.}{class_plane_a323f52af3edd8c55ffd23324a61da5ec}.
+
+
+
+Referenced by Transform\+::get\+Normal(), and Raytracer\+::raytrace().
+
+\index{Object@{Object}!is\+Inside@{is\+Inside}}
+\index{is\+Inside@{is\+Inside}!Object@{Object}}
+\subsubsection[{is\+Inside}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Object\+::is\+Inside (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{class_object_a652359286747bf237cb2d4d0a802bd18}
+
+
+Tests if a point is inside the object or not. 
+
+
+
+Implemented in {\bf Inverse} \doxyref{}{p.}{class_inverse_af3747e94047e18d4eff0fc61a92bf915}, {\bf Intersection} \doxyref{}{p.}{class_intersection_acbba7803bcd3928967fd675992a8ae96}, {\bf Transform} \doxyref{}{p.}{class_transform_acf224e03c58e2923df817808f66f1cd0}, {\bf Sphere} \doxyref{}{p.}{class_sphere_a25cf6b133c99f57aa23380c4511507cf}, and {\bf Plane} \doxyref{}{p.}{class_plane_a905978138dff21894a040eebee557b16}.
+
+
+
+Referenced by Transform\+::is\+Inside().
+
+\index{Object@{Object}!line\+Test@{line\+Test}}
+\index{line\+Test@{line\+Test}!Object@{Object}}
+\subsubsection[{line\+Test}]{\setlength{\rightskip}{0pt plus 5cm}virtual double Object\+::line\+Test (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{max\+Distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{class_object_a1bfd7ffbccda28c67d8a537393113a7e}
+
+
+Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. 
+
+Returns distance M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E if no such intersection exists.
+
+Direction is not neccessarily a vector of unit length, and distances are measured in multiples of this vector. 
+
+Implemented in {\bf Inverse} \doxyref{}{p.}{class_inverse_a7cd665a12ccf90142526965dfe416d1f}, {\bf Intersection} \doxyref{}{p.}{class_intersection_acadaeb4e35a52f4d1ff80769586921ff}, {\bf Transform} \doxyref{}{p.}{class_transform_ab2e6df43a4e87522a6e446b10cd67ca5}, {\bf Sphere} \doxyref{}{p.}{class_sphere_a138bf6427c11475d7b42f9debd6a1971}, and {\bf Plane} \doxyref{}{p.}{class_plane_acec0051b3d12e8ddd1e475de3f4ad9de}.
+
+
+
+Referenced by Transform\+::line\+Test(), and Raytracer\+::raytrace().
+
+\index{Object@{Object}!set\+Material@{set\+Material}}
+\index{set\+Material@{set\+Material}!Object@{Object}}
+\subsubsection[{set\+Material}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+::set\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Material} $\ast$}]{material}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_object_a239c2cad955282c6294da3d35be48fbd}
+
+
+Sets up a default material to use for this object. 
+
+
+
+Definition at line 31 of file object.\+cc.
+
+
+
+References Referenced\+Object\+::dereference(), material, and Referenced\+Object\+::reference().
+
+
+
+Referenced by main().
+
+
+
+\subsection{Member Data Documentation}
+\index{Object@{Object}!material@{material}}
+\index{material@{material}!Object@{Object}}
+\subsubsection[{material}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Material}$\ast$ Object\+::material\hspace{0.3cm}{\ttfamily [protected]}}\label{class_object_af475bd962d08ec97add4497e92436076}
+
+
+\doxyref{Material}{p.}{class_material} used by the default get\+Lighting\+Properties function. 
+
+
+
+Definition at line 71 of file object.\+h.
+
+
+
+Referenced by Transform\+::get\+Lighting\+Properties(), get\+Lighting\+Properties(), Object(), set\+Material(), and $\sim$\+Object().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf object.\+h}\item 
+{\bf object.\+cc}\end{DoxyCompactItemize}

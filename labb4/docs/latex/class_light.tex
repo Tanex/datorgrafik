@@ -1,0 +1,117 @@
+\section{Light Class Reference}
+\label{class_light}\index{Light@{Light}}
+
+
+Represents a simple direct point light in the scene.  
+
+
+
+
+{\ttfamily \#include $<$light.\+h$>$}
+
+
+
+Inheritance diagram for Light\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_light__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Light\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_light__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Light} (double {\bf position}[3], double {\bf colour}[3])
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf position} [3]
+\item 
+double {\bf colour} [3]
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Raytracer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a simple direct point light in the scene. 
+
+Must be added to the raytracer using the raytracer\+::add\+Light function. 
+
+Definition at line 34 of file light.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Light@{Light}!Light@{Light}}
+\index{Light@{Light}!Light@{Light}}
+\subsubsection[{Light}]{\setlength{\rightskip}{0pt plus 5cm}Light\+::\+Light (
+\begin{DoxyParamCaption}
+\item[{double}]{position[3], }
+\item[{double}]{colour[3]}
+\end{DoxyParamCaption}
+)}\label{class_light_abebfe14faccfd16ddb4b6548d5898857}
+
+
+Definition at line 27 of file light.\+cc.
+
+
+
+References assign(), colour, and position.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Light@{Light}!Raytracer@{Raytracer}}
+\index{Raytracer@{Raytracer}!Light@{Light}}
+\subsubsection[{Raytracer}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Raytracer}\hspace{0.3cm}{\ttfamily [friend]}}\label{class_light_abdcaeaebdde8832b52218293829319d1}
+
+
+Definition at line 41 of file light.\+h.
+
+
+
+\subsection{Member Data Documentation}
+\index{Light@{Light}!colour@{colour}}
+\index{colour@{colour}!Light@{Light}}
+\subsubsection[{colour}]{\setlength{\rightskip}{0pt plus 5cm}double Light\+::colour[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_light_afa2b33995ca8745650d9dbc98dbb8710}
+
+
+Definition at line 39 of file light.\+h.
+
+
+
+Referenced by Light(), and Raytracer\+::raytrace().
+
+\index{Light@{Light}!position@{position}}
+\index{position@{position}!Light@{Light}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}double Light\+::position[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_light_a6fcf74c8199df0c6fdfb10afe0c0fac1}
+
+
+Definition at line 38 of file light.\+h.
+
+
+
+Referenced by Light(), and Raytracer\+::raytrace().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf light.\+h}\item 
+{\bf light.\+cc}\end{DoxyCompactItemize}

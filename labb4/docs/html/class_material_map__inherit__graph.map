@@ -1,0 +1,4 @@
+<map id="MaterialMap" name="MaterialMap">
+<area shape="rect" id="node2" href="$class_material.html" title="Abstract base class for all materials. " alt="" coords="36,80,109,107"/>
+<area shape="rect" id="node3" href="$class_referenced_object.html" title="Base class for all objects which use a reference counter for memory management. " alt="" coords="5,5,140,32"/>
+</map>

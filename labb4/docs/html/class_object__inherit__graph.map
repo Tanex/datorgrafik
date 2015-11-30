@@ -1,0 +1,9 @@
+<map id="Object" name="Object">
+<area shape="rect" id="node4" href="$class_intersection.html" title="Creates new objects as the intersection of multiple child objects. " alt="" coords="5,229,103,256"/>
+<area shape="rect" id="node5" href="$class_inverse.html" title="Creates the inverse of an object by negating the Object::isInside and Object::GetNormal functions..." alt="" coords="127,229,195,256"/>
+<area shape="rect" id="node6" href="$class_plane.html" title="An infinite plane with given normal and offset from origo. " alt="" coords="219,229,276,256"/>
+<area shape="rect" id="node7" href="$class_sphere.html" title="A sphere of given radius. " alt="" coords="300,229,368,256"/>
+<area shape="rect" id="node8" href="$class_transform.html" title="Represents generic affine transformations. " alt="" coords="393,229,478,256"/>
+<area shape="rect" id="node2" href="$class_material.html" title="Abstract base class for all materials. " alt="" coords="211,80,284,107"/>
+<area shape="rect" id="node3" href="$class_referenced_object.html" title="Base class for all objects which use a reference counter for memory management. " alt="" coords="180,5,315,32"/>
+</map>

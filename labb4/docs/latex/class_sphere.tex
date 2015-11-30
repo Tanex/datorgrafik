@@ -1,0 +1,183 @@
+\section{Sphere Class Reference}
+\label{class_sphere}\index{Sphere@{Sphere}}
+
+
+A sphere of given radius.  
+
+
+
+
+{\ttfamily \#include $<$sphere.\+h$>$}
+
+
+
+Inheritance diagram for Sphere\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_sphere__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sphere\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_sphere__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Sphere} (double {\bf radius})
+\item 
+{\bf $\sim$\+Sphere} ()
+\item 
+double {\bf line\+Test} (double origin[3], double direction[3], double max\+Distance)
+\begin{DoxyCompactList}\small\item\em Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. \end{DoxyCompactList}\item 
+void {\bf get\+Normal} (double point[3], double normal[3])
+\begin{DoxyCompactList}\small\item\em Compute the normal of the object at the given point. \end{DoxyCompactList}\item 
+bool {\bf is\+Inside} (double point[3])
+\begin{DoxyCompactList}\small\item\em Tests if a point is inside the object or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf radius}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A sphere of given radius. 
+
+Definition at line 33 of file sphere.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\subsubsection[{Sphere}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+::\+Sphere (
+\begin{DoxyParamCaption}
+\item[{double}]{radius}
+\end{DoxyParamCaption}
+)}\label{class_sphere_ad9e68fc78c4e2ccb78098071428155da}
+
+
+Definition at line 27 of file sphere.\+cc.
+
+
+
+References radius.
+
+\index{Sphere@{Sphere}!````~Sphere@{$\sim$\+Sphere}}
+\index{````~Sphere@{$\sim$\+Sphere}!Sphere@{Sphere}}
+\subsubsection[{$\sim$\+Sphere}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+::$\sim$\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_sphere_a569c071e50a3e11f678630ee1a17737e}
+
+
+Definition at line 30 of file sphere.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Sphere@{Sphere}!get\+Normal@{get\+Normal}}
+\index{get\+Normal@{get\+Normal}!Sphere@{Sphere}}
+\subsubsection[{get\+Normal}]{\setlength{\rightskip}{0pt plus 5cm}void Sphere\+::get\+Normal (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_sphere_a36b26e53cef4b521c97df51fac315c68}
+
+
+Compute the normal of the object at the given point. 
+
+Result is not guaranteed to be of unit length. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a22c15ace5725e2577dbb187265bd3201}.
+
+
+
+Definition at line 49 of file sphere.\+cc.
+
+
+
+References assign().
+
+\index{Sphere@{Sphere}!is\+Inside@{is\+Inside}}
+\index{is\+Inside@{is\+Inside}!Sphere@{Sphere}}
+\subsubsection[{is\+Inside}]{\setlength{\rightskip}{0pt plus 5cm}bool Sphere\+::is\+Inside (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_sphere_a25cf6b133c99f57aa23380c4511507cf}
+
+
+Tests if a point is inside the object or not. 
+
+
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18}.
+
+
+
+Definition at line 53 of file sphere.\+cc.
+
+
+
+References dot\+Product(), and radius.
+
+\index{Sphere@{Sphere}!line\+Test@{line\+Test}}
+\index{line\+Test@{line\+Test}!Sphere@{Sphere}}
+\subsubsection[{line\+Test}]{\setlength{\rightskip}{0pt plus 5cm}double Sphere\+::line\+Test (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{max\+Distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_sphere_a138bf6427c11475d7b42f9debd6a1971}
+
+
+Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. 
+
+Returns distance M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E if no such intersection exists.
+
+Direction is not neccessarily a vector of unit length, and distances are measured in multiples of this vector. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a1bfd7ffbccda28c67d8a537393113a7e}.
+
+
+
+Definition at line 32 of file sphere.\+cc.
+
+
+
+References dot\+Product(), M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E, and radius.
+
+
+
+\subsection{Member Data Documentation}
+\index{Sphere@{Sphere}!radius@{radius}}
+\index{radius@{radius}!Sphere@{Sphere}}
+\subsubsection[{radius}]{\setlength{\rightskip}{0pt plus 5cm}double Sphere\+::radius\hspace{0.3cm}{\ttfamily [private]}}\label{class_sphere_a45d6c6c870fac7c2a885ad2e226334ad}
+
+
+Definition at line 43 of file sphere.\+h.
+
+
+
+Referenced by is\+Inside(), line\+Test(), and Sphere().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf sphere.\+h}\item 
+{\bf sphere.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,198 @@
+\section{Material\+Map Class Reference}
+\label{class_material_map}\index{Material\+Map@{Material\+Map}}
+
+
+Generic function mapped material.  
+
+
+
+
+{\ttfamily \#include $<$material.\+h$>$}
+
+
+
+Inheritance diagram for Material\+Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_material_map__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Material\+Map\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_material_map__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Function} \{ {\bf Noise}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Material\+Map} ({\bf Function} fun)
+\item 
+void {\bf add} (double node\+Position, {\bf Lighting\+Properties} $\ast${\bf node\+Properties})
+\item 
+virtual void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Returns the lighting properites at a certain point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Function} {\bf function}
+\item 
+double {\bf node\+Positions} [{\bf M\+A\+X\+\_\+\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+M\+A\+P\+\_\+\+N\+O\+D\+E\+S}]
+\item 
+{\bf Lighting\+Properties} {\bf node\+Properties} [{\bf M\+A\+X\+\_\+\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+M\+A\+P\+\_\+\+N\+O\+D\+E\+S}]
+\item 
+int {\bf n\+Nodes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generic function mapped material. 
+
+Interpolatates between multiple lighting properties depending on a given function. To use, instantiate with a given function and add all \doxyref{Lighting\+Properties}{p.}{class_lighting_properties} nodes that you want to interpolate between. Each node should be given a function value for which it will contribute 100\% to the resulting material property. 
+
+Definition at line 101 of file material.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{Material\+Map@{Material\+Map}!Function@{Function}}
+\index{Function@{Function}!Material\+Map@{Material\+Map}}
+\subsubsection[{Function}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Material\+Map\+::\+Function}}\label{class_material_map_a8421b6a814d23308f82ae8aa65210d2c}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Noise@{Noise}!Material\+Map@{Material\+Map}}\index{Material\+Map@{Material\+Map}!Noise@{Noise}}\item[{\em 
+Noise\label{class_material_map_a8421b6a814d23308f82ae8aa65210d2ca7335266b92cfbd695f89bdf112475089}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 103 of file material.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Material\+Map@{Material\+Map}!Material\+Map@{Material\+Map}}
+\index{Material\+Map@{Material\+Map}!Material\+Map@{Material\+Map}}
+\subsubsection[{Material\+Map}]{\setlength{\rightskip}{0pt plus 5cm}Material\+Map\+::\+Material\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf Function}}]{fun}
+\end{DoxyParamCaption}
+)}\label{class_material_map_a5edcadc83453646f73c0b9214ff67937}
+
+
+Definition at line 70 of file material.\+cc.
+
+
+
+References n\+Nodes.
+
+
+
+\subsection{Member Function Documentation}
+\index{Material\+Map@{Material\+Map}!add@{add}}
+\index{add@{add}!Material\+Map@{Material\+Map}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Material\+Map\+::add (
+\begin{DoxyParamCaption}
+\item[{double}]{node\+Position, }
+\item[{{\bf Lighting\+Properties} $\ast$}]{node\+Properties}
+\end{DoxyParamCaption}
+)}\label{class_material_map_ac0b6b46d1364415e48867ffd550a0cad}
+
+
+Definition at line 76 of file material.\+cc.
+
+
+
+References n\+Nodes, node\+Positions, and node\+Properties.
+
+
+
+Referenced by main().
+
+\index{Material\+Map@{Material\+Map}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Material\+Map@{Material\+Map}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Material\+Map\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_material_map_abd631c6e7b36737bcaadffbf47ca60aa}
+
+
+Returns the lighting properites at a certain point. 
+
+Is also given the current normal at that point, and can modify it. 
+
+Implements {\bf Material} \doxyref{}{p.}{class_material_ab61e7df6a740ad2ad3a82700005982bd}.
+
+
+
+Definition at line 93 of file material.\+cc.
+
+
+
+References Lighting\+Properties\+::ambient, Lighting\+Properties\+::diffuse, n\+Nodes, node\+Positions, node\+Properties, noise(), Lighting\+Properties\+::reflection, Lighting\+Properties\+::shininess, Lighting\+Properties\+::specular, and zero().
+
+
+
+\subsection{Member Data Documentation}
+\index{Material\+Map@{Material\+Map}!function@{function}}
+\index{function@{function}!Material\+Map@{Material\+Map}}
+\subsubsection[{function}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Function} Material\+Map\+::function\hspace{0.3cm}{\ttfamily [private]}}\label{class_material_map_a6e67e48f7ec5ba054d0223bd63914880}
+
+
+Definition at line 108 of file material.\+h.
+
+\index{Material\+Map@{Material\+Map}!n\+Nodes@{n\+Nodes}}
+\index{n\+Nodes@{n\+Nodes}!Material\+Map@{Material\+Map}}
+\subsubsection[{n\+Nodes}]{\setlength{\rightskip}{0pt plus 5cm}int Material\+Map\+::n\+Nodes\hspace{0.3cm}{\ttfamily [private]}}\label{class_material_map_ad4bd914574ead4cc4bd5519bc595bfc2}
+
+
+Definition at line 111 of file material.\+h.
+
+
+
+Referenced by add(), get\+Lighting\+Properties(), and Material\+Map().
+
+\index{Material\+Map@{Material\+Map}!node\+Positions@{node\+Positions}}
+\index{node\+Positions@{node\+Positions}!Material\+Map@{Material\+Map}}
+\subsubsection[{node\+Positions}]{\setlength{\rightskip}{0pt plus 5cm}double Material\+Map\+::node\+Positions[{\bf M\+A\+X\+\_\+\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+M\+A\+P\+\_\+\+N\+O\+D\+E\+S}]\hspace{0.3cm}{\ttfamily [private]}}\label{class_material_map_aa6fb5977287c2b9dddb56b49db4c55b6}
+
+
+Definition at line 109 of file material.\+h.
+
+
+
+Referenced by add(), and get\+Lighting\+Properties().
+
+\index{Material\+Map@{Material\+Map}!node\+Properties@{node\+Properties}}
+\index{node\+Properties@{node\+Properties}!Material\+Map@{Material\+Map}}
+\subsubsection[{node\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lighting\+Properties} Material\+Map\+::node\+Properties[{\bf M\+A\+X\+\_\+\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+M\+A\+P\+\_\+\+N\+O\+D\+E\+S}]\hspace{0.3cm}{\ttfamily [private]}}\label{class_material_map_ad549e9c01455af303728a60d85b3286f}
+
+
+Definition at line 110 of file material.\+h.
+
+
+
+Referenced by add(), and get\+Lighting\+Properties().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf material.\+h}\item 
+{\bf material.\+cc}\end{DoxyCompactItemize}

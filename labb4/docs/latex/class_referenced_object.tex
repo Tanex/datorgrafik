@@ -1,0 +1,144 @@
+\section{Referenced\+Object Class Reference}
+\label{class_referenced_object}\index{Referenced\+Object@{Referenced\+Object}}
+
+
+Base class for all objects which use a reference counter for memory management.  
+
+
+
+
+{\ttfamily \#include $<$referenced.\+h$>$}
+
+
+
+Inheritance diagram for Referenced\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_referenced_object__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Referenced\+Object} ()
+\item 
+virtual {\bf $\sim$\+Referenced\+Object} ()
+\item 
+void {\bf reference} ()
+\begin{DoxyCompactList}\small\item\em Call when an object reference is added to memory. \end{DoxyCompactList}\item 
+void {\bf dereference} ()
+\begin{DoxyCompactList}\small\item\em Call when an object is dereferenced. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf reference\+Counter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for all objects which use a reference counter for memory management. 
+
+
+
+Definition at line 30 of file referenced.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Referenced\+Object@{Referenced\+Object}!Referenced\+Object@{Referenced\+Object}}
+\index{Referenced\+Object@{Referenced\+Object}!Referenced\+Object@{Referenced\+Object}}
+\subsubsection[{Referenced\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Referenced\+Object\+::\+Referenced\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_referenced_object_af6e810408b0eb5855dbb467065016d79}
+
+
+Definition at line 28 of file referenced.\+cc.
+
+
+
+References reference\+Counter.
+
+\index{Referenced\+Object@{Referenced\+Object}!````~Referenced\+Object@{$\sim$\+Referenced\+Object}}
+\index{````~Referenced\+Object@{$\sim$\+Referenced\+Object}!Referenced\+Object@{Referenced\+Object}}
+\subsubsection[{$\sim$\+Referenced\+Object}]{\setlength{\rightskip}{0pt plus 5cm}Referenced\+Object\+::$\sim$\+Referenced\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_referenced_object_a7f91d5df8ecc65e0edb25ef05b36c58b}
+
+
+Definition at line 31 of file referenced.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Referenced\+Object@{Referenced\+Object}!dereference@{dereference}}
+\index{dereference@{dereference}!Referenced\+Object@{Referenced\+Object}}
+\subsubsection[{dereference}]{\setlength{\rightskip}{0pt plus 5cm}void Referenced\+Object\+::dereference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_referenced_object_a1b140008d6095b8590c59671bf5515d8}
+
+
+Call when an object is dereferenced. 
+
+Decreases the reference counter by one and deallocates the memory for the objectif neccessary. 
+
+Definition at line 33 of file referenced.\+cc.
+
+
+
+References reference\+Counter.
+
+
+
+Referenced by Object\+::set\+Material(), Object\+::$\sim$\+Object(), and Transform\+::$\sim$\+Transform().
+
+\index{Referenced\+Object@{Referenced\+Object}!reference@{reference}}
+\index{reference@{reference}!Referenced\+Object@{Referenced\+Object}}
+\subsubsection[{reference}]{\setlength{\rightskip}{0pt plus 5cm}void Referenced\+Object\+::reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_referenced_object_a0fc8392b9b02ce8203f7e01ee150397d}
+
+
+Call when an object reference is added to memory. 
+
+Increases the reference counter by one 
+
+Definition at line 32 of file referenced.\+cc.
+
+
+
+References reference\+Counter.
+
+
+
+Referenced by Raytracer\+::add\+Light(), Inverse\+::\+Inverse(), Object\+::set\+Material(), and Transform\+::\+Transform().
+
+
+
+\subsection{Member Data Documentation}
+\index{Referenced\+Object@{Referenced\+Object}!reference\+Counter@{reference\+Counter}}
+\index{reference\+Counter@{reference\+Counter}!Referenced\+Object@{Referenced\+Object}}
+\subsubsection[{reference\+Counter}]{\setlength{\rightskip}{0pt plus 5cm}int Referenced\+Object\+::reference\+Counter\hspace{0.3cm}{\ttfamily [private]}}\label{class_referenced_object_ae69c5359c130b544300b7ce189fd1d39}
+
+
+Definition at line 42 of file referenced.\+h.
+
+
+
+Referenced by dereference(), reference(), and Referenced\+Object().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf referenced.\+h}\item 
+{\bf referenced.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,329 @@
+\section{Raytracer Class Reference}
+\label{class_raytracer}\index{Raytracer@{Raytracer}}
+
+
+Main class for performing all raytracing operations.  
+
+
+
+
+{\ttfamily \#include $<$raytracer.\+h$>$}
+
+
+
+Collaboration diagram for Raytracer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=151pt]{class_raytracer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Raytracer} ()
+\item 
+{\bf $\sim$\+Raytracer} ()
+\item 
+void {\bf set\+Background} (double[3])
+\begin{DoxyCompactList}\small\item\em Sets the background colour of the scene, ie. \end{DoxyCompactList}\item 
+void {\bf set\+Ambient\+Light} (double[3])
+\begin{DoxyCompactList}\small\item\em Sets the global ambient light in the scene. \end{DoxyCompactList}\item 
+void {\bf add\+Light} ({\bf Light} $\ast$)
+\begin{DoxyCompactList}\small\item\em Adds a lightsource to the scene. \end{DoxyCompactList}\item 
+void {\bf add\+Object} ({\bf Object} $\ast$)
+\begin{DoxyCompactList}\small\item\em Adds an object to the scene. \end{DoxyCompactList}\item 
+void {\bf set\+Camera} ({\bf Camera} $\ast$)
+\begin{DoxyCompactList}\small\item\em Sets the camera object to be used when determining origin of the rays. \end{DoxyCompactList}\item 
+{\bf Camera} $\ast$ {\bf get\+Camera} ()
+\begin{DoxyCompactList}\small\item\em Gives the camera object currently used. \end{DoxyCompactList}\item 
+void {\bf raytrace} (double origin[3], double direction[3], double rgb[3], double contribution)
+\begin{DoxyCompactList}\small\item\em Basic raytracing routine that computes a colour to assign to a ray originating in origin with the given direction. \end{DoxyCompactList}\item 
+void {\bf raytrace} (int x, int y, double rgb[3])
+\begin{DoxyCompactList}\small\item\em Special case of general raytracing routine for screen pixel X,Y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Camera} $\ast$ {\bf camera}
+\item 
+double {\bf background} [3]
+\item 
+double {\bf ambient\+Light} [3]
+\item 
+class std\+::set$<$ {\bf Light} $\ast$ $>$ $\ast$ {\bf lights}
+\item 
+class std\+::set$<$ {\bf Object} $\ast$ $>$ $\ast$ {\bf objects}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main class for performing all raytracing operations. 
+
+To use, instantiate this class and give it a scene graph using the add\+Object and add\+Light operations. Also pass it a camera object using the set\+Camera function and give global lighting properties using set\+Background nad set\+Ambient\+Light.
+
+Once ready to use, the actual raytracing operation can be performed by calling the raytracer function for every pixel on the screen.
+
+Note that all objects are asssumed to be reentrant during the raytracring (ie. they should not change any internal state variables), and that updates on them should only be made in between frames. 
+
+Definition at line 56 of file raytracer.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Raytracer@{Raytracer}!Raytracer@{Raytracer}}
+\index{Raytracer@{Raytracer}!Raytracer@{Raytracer}}
+\subsubsection[{Raytracer}]{\setlength{\rightskip}{0pt plus 5cm}Raytracer\+::\+Raytracer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_ab012a6a83fb2ed05aa52993a9f6c2d53}
+
+
+Definition at line 31 of file raytracer.\+cc.
+
+
+
+References zero().
+
+
+
+Referenced by main().
+
+\index{Raytracer@{Raytracer}!````~Raytracer@{$\sim$\+Raytracer}}
+\index{````~Raytracer@{$\sim$\+Raytracer}!Raytracer@{Raytracer}}
+\subsubsection[{$\sim$\+Raytracer}]{\setlength{\rightskip}{0pt plus 5cm}Raytracer\+::$\sim$\+Raytracer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_a610ba0d74edf864c8ed78c5d85c4480a}
+
+
+Definition at line 37 of file raytracer.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Raytracer@{Raytracer}!add\+Light@{add\+Light}}
+\index{add\+Light@{add\+Light}!Raytracer@{Raytracer}}
+\subsubsection[{add\+Light}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::add\+Light (
+\begin{DoxyParamCaption}
+\item[{{\bf Light} $\ast$}]{light}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_a5e53831c2c52c3279b1a24ffef89c23f}
+
+
+Adds a lightsource to the scene. 
+
+
+
+Definition at line 58 of file raytracer.\+cc.
+
+
+
+References Referenced\+Object\+::reference().
+
+
+
+Referenced by main().
+
+\index{Raytracer@{Raytracer}!add\+Object@{add\+Object}}
+\index{add\+Object@{add\+Object}!Raytracer@{Raytracer}}
+\subsubsection[{add\+Object}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_ae03ca1a9a2c5f75744905a0c1bbc9734}
+
+
+Adds an object to the scene. 
+
+
+
+Definition at line 54 of file raytracer.\+cc.
+
+
+
+Referenced by main().
+
+\index{Raytracer@{Raytracer}!get\+Camera@{get\+Camera}}
+\index{get\+Camera@{get\+Camera}!Raytracer@{Raytracer}}
+\subsubsection[{get\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera} $\ast$ Raytracer\+::get\+Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_a84ef76a6d46b258ccc7f4b93e9cff012}
+
+
+Gives the camera object currently used. 
+
+
+
+Definition at line 63 of file raytracer.\+cc.
+
+
+
+Referenced by do\+Redraw().
+
+\index{Raytracer@{Raytracer}!raytrace@{raytrace}}
+\index{raytrace@{raytrace}!Raytracer@{Raytracer}}
+\subsubsection[{raytrace}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::raytrace (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{rgb[3], }
+\item[{double}]{contribution}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_aa1ab546300704b6db468549d1b60ede0}
+
+
+Basic raytracing routine that computes a colour to assign to a ray originating in origin with the given direction. 
+
+If no intersecting objects are found then it assigns the background colour to the vector rgb, otherwise the result of doing the light computations and recursive raytracing from the intersection point.
+
+Contribution is a hint for how much the resuling colours will contribute to the screen pixels and can be used to limit recursion. 
+
+Definition at line 69 of file raytracer.\+cc.
+
+
+
+References Lighting\+Properties\+::ambient, Light\+::colour, debug\+Indentation, debug\+This\+Pixel, Lighting\+Properties\+::diffuse, dot\+Product(), Object\+::get\+Lighting\+Properties(), Object\+::get\+Normal(), length(), Object\+::line\+Test(), M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E, normalize(), Light\+::position, print\+Debug\+Indentation(), Lighting\+Properties\+::reflection, Lighting\+Properties\+::shininess, Lighting\+Properties\+::specular, and sub().
+
+
+
+Referenced by do\+Redraw().
+
+\index{Raytracer@{Raytracer}!raytrace@{raytrace}}
+\index{raytrace@{raytrace}!Raytracer@{Raytracer}}
+\subsubsection[{raytrace}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::raytrace (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{double}]{rgb[3]}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_ae74fb4d0e5843de85e638c8d4a54e423}
+
+
+Special case of general raytracing routine for screen pixel X,Y. 
+
+Fetches the origin/direction from the current camera settings. 
+
+Definition at line 64 of file raytracer.\+cc.
+
+
+
+References screen\+Height, and screen\+Width.
+
+\index{Raytracer@{Raytracer}!set\+Ambient\+Light@{set\+Ambient\+Light}}
+\index{set\+Ambient\+Light@{set\+Ambient\+Light}!Raytracer@{Raytracer}}
+\subsubsection[{set\+Ambient\+Light}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::set\+Ambient\+Light (
+\begin{DoxyParamCaption}
+\item[{double}]{col[3]}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_ad575fe4aaf08119db97118e60e481a13}
+
+
+Sets the global ambient light in the scene. 
+
+
+
+Definition at line 52 of file raytracer.\+cc.
+
+
+
+References assign().
+
+
+
+Referenced by main().
+
+\index{Raytracer@{Raytracer}!set\+Background@{set\+Background}}
+\index{set\+Background@{set\+Background}!Raytracer@{Raytracer}}
+\subsubsection[{set\+Background}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::set\+Background (
+\begin{DoxyParamCaption}
+\item[{double}]{col[3]}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_ad5bbcd47429ca7822a3cb9226ec6c81a}
+
+
+Sets the background colour of the scene, ie. 
+
+the colour used for all pixels that hit no object. 
+
+Definition at line 51 of file raytracer.\+cc.
+
+
+
+References assign().
+
+\index{Raytracer@{Raytracer}!set\+Camera@{set\+Camera}}
+\index{set\+Camera@{set\+Camera}!Raytracer@{Raytracer}}
+\subsubsection[{set\+Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Raytracer\+::set\+Camera (
+\begin{DoxyParamCaption}
+\item[{{\bf Camera} $\ast$}]{cam}
+\end{DoxyParamCaption}
+)}\label{class_raytracer_a48979448b65a995721450c8c7ded9f19}
+
+
+Sets the camera object to be used when determining origin of the rays. 
+
+
+
+Definition at line 62 of file raytracer.\+cc.
+
+
+
+Referenced by main().
+
+
+
+\subsection{Member Data Documentation}
+\index{Raytracer@{Raytracer}!ambient\+Light@{ambient\+Light}}
+\index{ambient\+Light@{ambient\+Light}!Raytracer@{Raytracer}}
+\subsubsection[{ambient\+Light}]{\setlength{\rightskip}{0pt plus 5cm}double Raytracer\+::ambient\+Light[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_raytracer_a7912e30ac04157900286f2fa6eaf8ae7}
+
+
+Definition at line 95 of file raytracer.\+h.
+
+
+
+Referenced by main().
+
+\index{Raytracer@{Raytracer}!background@{background}}
+\index{background@{background}!Raytracer@{Raytracer}}
+\subsubsection[{background}]{\setlength{\rightskip}{0pt plus 5cm}double Raytracer\+::background[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_raytracer_a4780e0feac28d575a53d7981113467ad}
+
+
+Definition at line 94 of file raytracer.\+h.
+
+\index{Raytracer@{Raytracer}!camera@{camera}}
+\index{camera@{camera}!Raytracer@{Raytracer}}
+\subsubsection[{camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera}$\ast$ Raytracer\+::camera\hspace{0.3cm}{\ttfamily [private]}}\label{class_raytracer_aa56a6383a51f5b4f4142ff1223e7d6e7}
+
+
+Definition at line 93 of file raytracer.\+h.
+
+
+
+Referenced by do\+Redraw().
+
+\index{Raytracer@{Raytracer}!lights@{lights}}
+\index{lights@{lights}!Raytracer@{Raytracer}}
+\subsubsection[{lights}]{\setlength{\rightskip}{0pt plus 5cm}class std\+::set$<$ {\bf Light} $\ast$ $>$$\ast$ Raytracer\+::lights\hspace{0.3cm}{\ttfamily [private]}}\label{class_raytracer_aec6b370de6983fda41b3705664bf2841}
+
+
+Definition at line 97 of file raytracer.\+h.
+
+\index{Raytracer@{Raytracer}!objects@{objects}}
+\index{objects@{objects}!Raytracer@{Raytracer}}
+\subsubsection[{objects}]{\setlength{\rightskip}{0pt plus 5cm}class std\+::set$<$ {\bf Object} $\ast$ $>$$\ast$ Raytracer\+::objects\hspace{0.3cm}{\ttfamily [private]}}\label{class_raytracer_ad2035caf15bcdf69dad408afcb03ea52}
+
+
+Definition at line 98 of file raytracer.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf raytracer.\+h}\item 
+{\bf raytracer.\+cc}\end{DoxyCompactItemize}

@@ -1,0 +1,6 @@
+<map id="light.h" name="light.h">
+<area shape="rect" id="node2" href="$light_8cc.html" title="Implements all methods for the Light class. " alt="" coords="5,80,72,107"/>
+<area shape="rect" id="node3" href="$raytracer_8h.html" title="Declares the main raytracing functionality for the Raytracer class. " alt="" coords="147,80,237,107"/>
+<area shape="rect" id="node4" href="$main_8cc.html" title="The main entry point and code skeleton for a raytracer. " alt="" coords="73,155,145,181"/>
+<area shape="rect" id="node5" href="$raytracer_8cc.html" title="Implements the main raytracing functionality for the Raytracer class. " alt="" coords="170,155,267,181"/>
+</map>

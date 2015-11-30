@@ -1,0 +1,273 @@
+\section{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+
+
+Represents the camera and determines the point from which rays are cast in the scene.  
+
+
+
+
+{\ttfamily \#include $<$camera.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Camera} ()
+\item 
+void {\bf set\+Origin} (double[3])
+\item 
+void {\bf set\+Up} (double[3])
+\begin{DoxyCompactList}\small\item\em Defines the up vector used by the camera, usually set to +\+Y. \end{DoxyCompactList}\item 
+void {\bf set\+Right} (double[3])
+\begin{DoxyCompactList}\small\item\em Defines the right vector used by the camera. \end{DoxyCompactList}\item 
+void {\bf set\+Forward} (double[3])
+\begin{DoxyCompactList}\small\item\em Defines the forward vector used by the camera. \end{DoxyCompactList}\item 
+void {\bf set\+Focus} (double[3])
+\begin{DoxyCompactList}\small\item\em Computes up/right/forward vectors so that we are focusing on given point. \end{DoxyCompactList}\item 
+void {\bf get\+Pixel\+Ray} (double x, double y, double {\bf origin}[3], double direction[3])
+\begin{DoxyCompactList}\small\item\em Assigns the origin/direction ray corresponding to a given pixel where x/y is a fraction 0.\+0 -\/ 1.\+0 of screen width/height. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf origin} [3]
+\item 
+double {\bf up} [3]
+\item 
+double {\bf right} [3]
+\item 
+double {\bf forward} [3]
+\item 
+double {\bf tan\+Fov\+Y}
+\item 
+double {\bf tan\+Fov\+X}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents the camera and determines the point from which rays are cast in the scene. 
+
+Use this to modify the perspective and to move the camera between frames. 
+
+Definition at line 32 of file camera.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{Camera}]{\setlength{\rightskip}{0pt plus 5cm}Camera\+::\+Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_camera_a01f94c3543f56ede7af49dc778f19331}
+
+
+Definition at line 28 of file camera.\+cc.
+
+
+
+References forward, origin, right, tan\+Fov\+X, tan\+Fov\+Y, up, and zero().
+
+
+
+\subsection{Member Function Documentation}
+\index{Camera@{Camera}!get\+Pixel\+Ray@{get\+Pixel\+Ray}}
+\index{get\+Pixel\+Ray@{get\+Pixel\+Ray}!Camera@{Camera}}
+\subsubsection[{get\+Pixel\+Ray}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::get\+Pixel\+Ray (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a83adcb9422badb67533f8d676343d3a0}
+
+
+Assigns the origin/direction ray corresponding to a given pixel where x/y is a fraction 0.\+0 -\/ 1.\+0 of screen width/height. 
+
+
+
+Definition at line 57 of file camera.\+cc.
+
+
+
+References assign(), forward, normalize(), right, tan\+Fov\+X, tan\+Fov\+Y, and up.
+
+\index{Camera@{Camera}!set\+Focus@{set\+Focus}}
+\index{set\+Focus@{set\+Focus}!Camera@{Camera}}
+\subsubsection[{set\+Focus}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::set\+Focus (
+\begin{DoxyParamCaption}
+\item[{double}]{focus[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a00df3752f4d70ff0fac3d4e945789476}
+
+
+Computes up/right/forward vectors so that we are focusing on given point. 
+
+Uses old values of up as hint whenever possible. 
+
+Definition at line 38 of file camera.\+cc.
+
+
+
+References cross\+Product(), dot\+Product(), forward, normalize(), origin, right, sub(), and up.
+
+
+
+Referenced by do\+Redraw().
+
+\index{Camera@{Camera}!set\+Forward@{set\+Forward}}
+\index{set\+Forward@{set\+Forward}!Camera@{Camera}}
+\subsubsection[{set\+Forward}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::set\+Forward (
+\begin{DoxyParamCaption}
+\item[{double}]{v[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a1f4f3efde69f841fd6da836ac44d7586}
+
+
+Defines the forward vector used by the camera. 
+
+Must be orthogonal to right and up vectors. 
+
+Definition at line 36 of file camera.\+cc.
+
+
+
+References assign(), forward, and normalize().
+
+\index{Camera@{Camera}!set\+Origin@{set\+Origin}}
+\index{set\+Origin@{set\+Origin}!Camera@{Camera}}
+\subsubsection[{set\+Origin}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::set\+Origin (
+\begin{DoxyParamCaption}
+\item[{double}]{v[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a493cfa819bd86a70ceaa9b8f046a3d74}
+
+
+Definition at line 33 of file camera.\+cc.
+
+
+
+References assign(), and origin.
+
+
+
+Referenced by do\+Redraw().
+
+\index{Camera@{Camera}!set\+Right@{set\+Right}}
+\index{set\+Right@{set\+Right}!Camera@{Camera}}
+\subsubsection[{set\+Right}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::set\+Right (
+\begin{DoxyParamCaption}
+\item[{double}]{v[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a78761beccc99b02161e4d65de9434ab8}
+
+
+Defines the right vector used by the camera. 
+
+Must be orthogonal to up and forward vectors. 
+
+Definition at line 35 of file camera.\+cc.
+
+
+
+References assign(), normalize(), and right.
+
+\index{Camera@{Camera}!set\+Up@{set\+Up}}
+\index{set\+Up@{set\+Up}!Camera@{Camera}}
+\subsubsection[{set\+Up}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\+::set\+Up (
+\begin{DoxyParamCaption}
+\item[{double}]{v[3]}
+\end{DoxyParamCaption}
+)}\label{class_camera_a56c8da10e84cf09b89d497167122a17c}
+
+
+Defines the up vector used by the camera, usually set to +\+Y. 
+
+Must be orthogonal to right and forward vectors. 
+
+Definition at line 34 of file camera.\+cc.
+
+
+
+References assign(), normalize(), and up.
+
+
+
+Referenced by do\+Redraw().
+
+
+
+\subsection{Member Data Documentation}
+\index{Camera@{Camera}!forward@{forward}}
+\index{forward@{forward}!Camera@{Camera}}
+\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::forward[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_aa73fe4b7a65620ba8666a6e4153ef5e0}
+
+
+Definition at line 63 of file camera.\+h.
+
+
+
+Referenced by Camera(), get\+Pixel\+Ray(), set\+Focus(), and set\+Forward().
+
+\index{Camera@{Camera}!origin@{origin}}
+\index{origin@{origin}!Camera@{Camera}}
+\subsubsection[{origin}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::origin[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_ab434eeb127d9900a8c62c3de293776e2}
+
+
+Definition at line 59 of file camera.\+h.
+
+
+
+Referenced by Camera(), set\+Focus(), and set\+Origin().
+
+\index{Camera@{Camera}!right@{right}}
+\index{right@{right}!Camera@{Camera}}
+\subsubsection[{right}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::right[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_a1b0770aece5b6ab495c1b38557fa6de8}
+
+
+Definition at line 62 of file camera.\+h.
+
+
+
+Referenced by Camera(), get\+Pixel\+Ray(), set\+Focus(), and set\+Right().
+
+\index{Camera@{Camera}!tan\+Fov\+X@{tan\+Fov\+X}}
+\index{tan\+Fov\+X@{tan\+Fov\+X}!Camera@{Camera}}
+\subsubsection[{tan\+Fov\+X}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::tan\+Fov\+X\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_a6cca78cef9affdbecab440df3f751776}
+
+
+Definition at line 65 of file camera.\+h.
+
+
+
+Referenced by Camera(), and get\+Pixel\+Ray().
+
+\index{Camera@{Camera}!tan\+Fov\+Y@{tan\+Fov\+Y}}
+\index{tan\+Fov\+Y@{tan\+Fov\+Y}!Camera@{Camera}}
+\subsubsection[{tan\+Fov\+Y}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::tan\+Fov\+Y\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_a269f0793e78f88f54c8b31aacb1be3f5}
+
+
+Definition at line 65 of file camera.\+h.
+
+
+
+Referenced by Camera(), and get\+Pixel\+Ray().
+
+\index{Camera@{Camera}!up@{up}}
+\index{up@{up}!Camera@{Camera}}
+\subsubsection[{up}]{\setlength{\rightskip}{0pt plus 5cm}double Camera\+::up[3]\hspace{0.3cm}{\ttfamily [private]}}\label{class_camera_af6d50d50de039113a852a12b4e752cdc}
+
+
+Definition at line 61 of file camera.\+h.
+
+
+
+Referenced by Camera(), get\+Pixel\+Ray(), set\+Focus(), and set\+Up().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf camera.\+h}\item 
+{\bf camera.\+cc}\end{DoxyCompactItemize}

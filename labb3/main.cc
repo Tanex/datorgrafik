@@ -132,6 +132,13 @@ void Resources::reload() {
   //part 2
   buildBuffers(model);
 
+  GLuint gpuBuffer[2];
+  glGenBuffers(2, gpuBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer[0]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4)*getVertexBufSize(), (void*)vertexBuffer, GL_STATIC_DRAW);
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gpuBuffer[1]);
+
   isOk=1;
 }
 
@@ -154,9 +161,9 @@ void Resources::traverseAndCount(AC3DObject* node)
 		for (int i = 0; i < node->nSurfaces; i++)
 		{
 			if (node->surfaces[i].nVertices == 3)
-				sizeOfTriIndiceBuffer += 3;
+				sizeOfTriIndiceBuffer++;// += 3;
 			else //if (node->surfaces[i].nVertices == 4)
-				sizeOfQuadIndiceBuffer += 4;
+				sizeOfQuadIndiceBuffer++;// += 4;
 		}
 	}
 }
@@ -184,7 +191,7 @@ void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesB
 	{
 		AC3DSurface surface = obj->surfaces[i];
 		for (int j = 0; j < surface.nVertices; j++)
-			indices[i][j] = surface.vert[j].index + verticesUsed;// *vertexBufIndex; //compensate for already added objects
+			indices[i][j] = surface.vert[j].index +  *vertexBufIndex / 2; //compensate for already added objects
 	}
 
 	verticesUsed += obj->nVertices;
@@ -196,10 +203,7 @@ void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesB
 		else //if (obj->surfaces->nVertices == 4)
 			quadIndiceBuffer[(*quadIndicesBufIndex)++] = indices[i];
 	}
-
-	delete indices;
-
-
+	
 	glm::vec4* normals = new glm::vec4[obj->nVertices];
 	//Zero all normals
 	for (int i = 0; i < obj->nVertices; i++)
@@ -213,8 +217,8 @@ void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesB
 
 		for (int j = 0; j < 3; j++)
 			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index],
-				obj->vertices[obj->surfaces[i].vert[j].index + 1],
-				obj->vertices[obj->surfaces[i].vert[j].index + 2]);
+									obj->vertices[obj->surfaces[i].vert[j].index + 1],
+									obj->vertices[obj->surfaces[i].vert[j].index + 2]);
 
 		glm::vec3 normal = glm::cross(glm::normalize(vertices[1] - vertices[0]), glm::normalize(vertices[2] - vertices[1]));
 
@@ -240,6 +244,7 @@ void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesB
 
 	delete normals;
 	delete surface_normals;
+	delete indices;
 }
 
 void Resources::buildBuffers(AC3DObject* node)
@@ -271,18 +276,13 @@ World::World() {
 void World::modelRedrawWBuf(AC3DObject* node, Resources* r)
 {
 	//Setup attribPointers
-	/*glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[0]);
-	glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[0]);
+	//glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[1]);
-	glEnableVertexAttribArray(2);*/
+	//glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[1]);
+	//glEnableVertexAttribArray(2);
 
 	//Setup attribPointers with vertexBuffer
-	GLuint gpuBuffer[1];
-	glGenBuffers(1, gpuBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer[0]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec4)*r->getVertexBufSize(), (void*)r->vertexBuffer, GL_STATIC_DRAW);
-
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, nullptr);
 	glEnableVertexAttribArray(0);
 
@@ -306,33 +306,30 @@ void World::modelRedrawTraverseWBuf(AC3DObject* node, Resources* r, int* vertice
 
 void World::modelRedrawLeafWBuf(AC3DObject* obj, Resources* r, int* verticesUsed)
 {
-	/*glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
+	//glm::ivec4* indices = new glm::ivec4[obj->nSurfaces];
 
-	//Create indices
-	for (int i = 0; i < obj->nSurfaces; i++)
-	{
-		AC3DSurface surface = obj->surfaces[i];
-		for (int j = 0; j < surface.nVertices; j++)
-			indices[i][j] = surface.vert[j].index + *verticesUsed;
-	}
+	////Create indices
+	//for (int i = 0; i < obj->nSurfaces; i++)
+	//{
+	//	AC3DSurface surface = obj->surfaces[i];
+	//	for (int j = 0; j < surface.nVertices; j++)
+	//		indices[i][j] = surface.vert[j].index + *verticesUsed;
+	//}
 
-	*verticesUsed += obj->nVertices;
+	//*verticesUsed += obj->nVertices;
 
-	//Draw
-	for (int i = 0; i < obj->nSurfaces; i++)
-	{
-		if (obj->surfaces[i].nVertices == 3)
-			glDrawElements(GL_TRIANGLES, 1 * 3, GL_UNSIGNED_INT, &indices[i][0]);
-		else //(obj->surfaces[i].nVertices == 4)
-			glDrawElements(GL_QUADS, 1 * 4, GL_UNSIGNED_INT, &indices[i][0]);
-	}
+	////Draw
+	//for (int i = 0; i < obj->nSurfaces; i++)
+	//{
+	//	if (obj->surfaces[i].nVertices == 3)
+	//		glDrawElements(GL_TRIANGLES, 1 * 3, GL_UNSIGNED_INT, &indices[i][0]);
+	//	else //(obj->surfaces[i].nVertices == 4)
+	//		glDrawElements(GL_QUADS, 1 * 4, GL_UNSIGNED_INT, &indices[i][0]);
+	//}
 
-	delete indices;*/
+	//delete indices;
 
-	GLuint gpuBuffer[1];
-	glGenBuffers(1, gpuBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gpuBuffer[0]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getTriIndicesBufSize(), (void*)r->triIndiceBuffer, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec3)*r->getTriIndicesBufSize(), (void*)r->triIndiceBuffer, GL_STATIC_DRAW);
 
 	glDrawElements(GL_TRIANGLES, 3 * r->getTriIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
 
@@ -460,7 +457,7 @@ void World::doRedraw(Resources *r) {
 
   // modelviewatrix
   glm::mat4 modelviewMatrix =
-	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -4)) *
+	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -2)) *
 	  glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0, 1, 0)) *
 	  glm::rotate(glm::mat4(1.0f), 0.4f*(float)time, glm::vec3(1, 0, 0));
 

@@ -1,0 +1,222 @@
+\section{Intersection Class Reference}
+\label{class_intersection}\index{Intersection@{Intersection}}
+
+
+Creates new objects as the intersection of multiple child objects.  
+
+
+
+
+{\ttfamily \#include $<$csg.\+h$>$}
+
+
+
+Inheritance diagram for Intersection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_intersection__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Intersection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{class_intersection__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Intersection} ()
+\item 
+{\bf $\sim$\+Intersection} ()
+\item 
+void {\bf add\+Object} ({\bf Object} $\ast$)
+\item 
+double {\bf line\+Test} (double origin[3], double direction[3], double max\+Distance)
+\begin{DoxyCompactList}\small\item\em Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. \end{DoxyCompactList}\item 
+void {\bf get\+Normal} (double point[3], double normal[3])
+\begin{DoxyCompactList}\small\item\em Compute the normal of the object at the given point. \end{DoxyCompactList}\item 
+bool {\bf is\+Inside} (double point[3])
+\begin{DoxyCompactList}\small\item\em Tests if a point is inside the object or not. \end{DoxyCompactList}\item 
+void {\bf get\+Lighting\+Properties} (double point[3], {\bf Lighting\+Properties} $\ast$props, double normal[3])
+\begin{DoxyCompactList}\small\item\em Default material handling that queries the default material given for this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+class std\+::set$<$ {\bf Object} $\ast$ $>$ $\ast$ {\bf objects}
+\item 
+{\bf Object} $\ast$ {\bf last\+Object} [{\bf M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}]
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Creates new objects as the intersection of multiple child objects. 
+
+This is one of the basic C\+S\+G building blocks of more complex geometry. In this current implementation it is done in a generic, but inefficeint manner. More efficient code can be made using harder restrictions on the contained child objects. 
+
+Definition at line 38 of file csg.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Intersection@{Intersection}!Intersection@{Intersection}}
+\index{Intersection@{Intersection}!Intersection@{Intersection}}
+\subsubsection[{Intersection}]{\setlength{\rightskip}{0pt plus 5cm}Intersection\+::\+Intersection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_intersection_a67497e3efe2793b23909052eeb82c4f3}
+
+
+Definition at line 30 of file csg.\+cc.
+
+
+
+References M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S.
+
+\index{Intersection@{Intersection}!````~Intersection@{$\sim$\+Intersection}}
+\index{````~Intersection@{$\sim$\+Intersection}!Intersection@{Intersection}}
+\subsubsection[{$\sim$\+Intersection}]{\setlength{\rightskip}{0pt plus 5cm}Intersection\+::$\sim$\+Intersection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_intersection_a064951a970ed8dd11081b2903ab62122}
+
+
+Definition at line 34 of file csg.\+cc.
+
+
+
+\subsection{Member Function Documentation}
+\index{Intersection@{Intersection}!add\+Object@{add\+Object}}
+\index{add\+Object@{add\+Object}!Intersection@{Intersection}}
+\subsubsection[{add\+Object}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\+::add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}\label{class_intersection_a62cc72188b282d2887f5979e7b5f5325}
+
+
+Definition at line 42 of file csg.\+cc.
+
+
+
+Referenced by main().
+
+\index{Intersection@{Intersection}!get\+Lighting\+Properties@{get\+Lighting\+Properties}}
+\index{get\+Lighting\+Properties@{get\+Lighting\+Properties}!Intersection@{Intersection}}
+\subsubsection[{get\+Lighting\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\+::get\+Lighting\+Properties (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{{\bf Lighting\+Properties} $\ast$}]{props, }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_intersection_aeaf604c0cdbef2d4c2a0f2087287ead8}
+
+
+Default material handling that queries the default material given for this object. 
+
+
+
+Reimplemented from {\bf Object} \doxyref{}{p.}{class_object_a510171215bdf364cc0bf8f72336039b9}.
+
+
+
+Definition at line 137 of file csg.\+cc.
+
+\index{Intersection@{Intersection}!get\+Normal@{get\+Normal}}
+\index{get\+Normal@{get\+Normal}!Intersection@{Intersection}}
+\subsubsection[{get\+Normal}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\+::get\+Normal (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3], }
+\item[{double}]{normal[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_intersection_aca5201537e1f12305142be681b0e0b47}
+
+
+Compute the normal of the object at the given point. 
+
+Result is not guaranteed to be of unit length. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a22c15ace5725e2577dbb187265bd3201}.
+
+
+
+Definition at line 114 of file csg.\+cc.
+
+\index{Intersection@{Intersection}!is\+Inside@{is\+Inside}}
+\index{is\+Inside@{is\+Inside}!Intersection@{Intersection}}
+\subsubsection[{is\+Inside}]{\setlength{\rightskip}{0pt plus 5cm}bool Intersection\+::is\+Inside (
+\begin{DoxyParamCaption}
+\item[{double}]{point[3]}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_intersection_acbba7803bcd3928967fd675992a8ae96}
+
+
+Tests if a point is inside the object or not. 
+
+
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a652359286747bf237cb2d4d0a802bd18}.
+
+
+
+Definition at line 125 of file csg.\+cc.
+
+\index{Intersection@{Intersection}!line\+Test@{line\+Test}}
+\index{line\+Test@{line\+Test}!Intersection@{Intersection}}
+\subsubsection[{line\+Test}]{\setlength{\rightskip}{0pt plus 5cm}double Intersection\+::line\+Test (
+\begin{DoxyParamCaption}
+\item[{double}]{origin[3], }
+\item[{double}]{direction[3], }
+\item[{double}]{max\+Distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_intersection_acadaeb4e35a52f4d1ff80769586921ff}
+
+
+Must do the line intersection test and return the closest distance in which a ray originating in origin with given direction intersects the object -\/ if such a point exists closer than max\+Distance. 
+
+Returns distance M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E if no such intersection exists.
+
+Direction is not neccessarily a vector of unit length, and distances are measured in multiples of this vector. 
+
+Implements {\bf Object} \doxyref{}{p.}{class_object_a1bfd7ffbccda28c67d8a537393113a7e}.
+
+
+
+Definition at line 47 of file csg.\+cc.
+
+
+
+References assign(), debug\+Indentation, debug\+This\+Pixel, M\+A\+X\+\_\+\+D\+I\+S\+T\+A\+N\+C\+E, and print\+Debug\+Indentation().
+
+
+
+\subsection{Member Data Documentation}
+\index{Intersection@{Intersection}!last\+Object@{last\+Object}}
+\index{last\+Object@{last\+Object}!Intersection@{Intersection}}
+\subsubsection[{last\+Object}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object}$\ast$ Intersection\+::last\+Object[{\bf M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}]\hspace{0.3cm}{\ttfamily [private]}}\label{class_intersection_a4bb95b11d0d394e87971b20b1cb12f45}
+
+
+Definition at line 53 of file csg.\+h.
+
+\index{Intersection@{Intersection}!objects@{objects}}
+\index{objects@{objects}!Intersection@{Intersection}}
+\subsubsection[{objects}]{\setlength{\rightskip}{0pt plus 5cm}class std\+::set$<$ {\bf Object} $\ast$ $>$$\ast$ Intersection\+::objects\hspace{0.3cm}{\ttfamily [private]}}\label{class_intersection_aa44bbc9287dbeaf174128bdbbba0ca71}
+
+
+Definition at line 51 of file csg.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+{\bf csg.\+h}\item 
+{\bf csg.\+cc}\end{DoxyCompactItemize}

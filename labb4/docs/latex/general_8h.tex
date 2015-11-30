@@ -1,0 +1,163 @@
+\section{general.\+h File Reference}
+\label{general_8h}\index{general.\+h@{general.\+h}}
+
+
+Contains common type definitions, includes, etc.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$set$>$}\\*
+{\ttfamily \#include $<$windows.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}S\+D\+L/\+S\+D\+L.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\+D\+L/\+S\+D\+L\+\_\+mouse.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\+D\+L/\+S\+D\+L\+\_\+keyboard.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\+D\+L/\+S\+D\+L\+\_\+keysym.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\+D\+L/\+S\+D\+L\+\_\+image.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}vector.\+h\char`\"{}}\\*
+Include dependency graph for general.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{general_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{general_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf M\+I\+N}(x, y)~((x)$<$(y)?(x)\+:(y))
+\item 
+\#define {\bf M\+A\+X}(x, y)~((x)$>$(y)?(x)\+:(y))
+\item 
+\#define {\bf M\+\_\+\+P\+I}~3.\+14159265
+\item 
+\#define {\bf M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}~32
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf print\+Debug\+Indentation} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf debug\+This\+Pixel}
+\item 
+int {\bf debug\+Indentation}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains common type definitions, includes, etc. 
+
+for all labs 
+
+Definition in file {\bf general.\+h}.
+
+
+
+\subsection{Macro Definition Documentation}
+\index{general.\+h@{general.\+h}!M\+\_\+\+P\+I@{M\+\_\+\+P\+I}}
+\index{M\+\_\+\+P\+I@{M\+\_\+\+P\+I}!general.\+h@{general.\+h}}
+\subsubsection[{M\+\_\+\+P\+I}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+\_\+\+P\+I~3.\+14159265}\label{general_8h_ae71449b1cc6e6250b91f539153a7a0d3}
+
+
+Definition at line 51 of file general.\+h.
+
+
+
+Referenced by do\+Redraw().
+
+\index{general.\+h@{general.\+h}!M\+A\+X@{M\+A\+X}}
+\index{M\+A\+X@{M\+A\+X}!general.\+h@{general.\+h}}
+\subsubsection[{M\+A\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~((x)$>$(y)?(x)\+:(y))}\label{general_8h_aacc3ee1a7f283f8ef65cea31f4436a95}
+
+
+Definition at line 48 of file general.\+h.
+
+\index{general.\+h@{general.\+h}!M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S@{M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}}
+\index{M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S@{M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}!general.\+h@{general.\+h}}
+\subsubsection[{M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+O\+M\+P\+\_\+\+T\+H\+R\+E\+A\+D\+S~32}\label{general_8h_a44940083ba78c21d097d37dcc0a49aec}
+
+
+Definition at line 57 of file general.\+h.
+
+
+
+Referenced by Intersection\+::\+Intersection().
+
+\index{general.\+h@{general.\+h}!M\+I\+N@{M\+I\+N}}
+\index{M\+I\+N@{M\+I\+N}!general.\+h@{general.\+h}}
+\subsubsection[{M\+I\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+I\+N(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~((x)$<$(y)?(x)\+:(y))}\label{general_8h_a74e75242132eaabbc1c512488a135926}
+
+
+Definition at line 47 of file general.\+h.
+
+
+
+\subsection{Function Documentation}
+\index{general.\+h@{general.\+h}!print\+Debug\+Indentation@{print\+Debug\+Indentation}}
+\index{print\+Debug\+Indentation@{print\+Debug\+Indentation}!general.\+h@{general.\+h}}
+\subsubsection[{print\+Debug\+Indentation}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Debug\+Indentation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{general_8h_ae1c327e9afb4e6ccd35029355384fe71}
+
+
+Definition at line 291 of file main.\+cc.
+
+
+
+References debug\+Indentation.
+
+
+
+Referenced by Plane\+::line\+Test(), Intersection\+::line\+Test(), and Raytracer\+::raytrace().
+
+
+
+\subsection{Variable Documentation}
+\index{general.\+h@{general.\+h}!debug\+Indentation@{debug\+Indentation}}
+\index{debug\+Indentation@{debug\+Indentation}!general.\+h@{general.\+h}}
+\subsubsection[{debug\+Indentation}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+Indentation}\label{general_8h_a5906e7ce057ac03baa7e87832fcad510}
+
+
+Definition at line 84 of file main.\+cc.
+
+
+
+Referenced by Intersection\+::line\+Test(), print\+Debug\+Indentation(), and Raytracer\+::raytrace().
+
+\index{general.\+h@{general.\+h}!debug\+This\+Pixel@{debug\+This\+Pixel}}
+\index{debug\+This\+Pixel@{debug\+This\+Pixel}!general.\+h@{general.\+h}}
+\subsubsection[{debug\+This\+Pixel}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+This\+Pixel}\label{general_8h_a030f3c150bfe06af45f51ded93eb4d57}
+
+
+Definition at line 83 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), Plane\+::line\+Test(), Intersection\+::line\+Test(), and Raytracer\+::raytrace().
+

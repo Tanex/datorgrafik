@@ -1,0 +1,363 @@
+\section{main.\+cc File Reference}
+\label{main_8cc}\index{main.\+cc@{main.\+cc}}
+
+
+The main entry point and code skeleton for a raytracer.  
+
+
+{\ttfamily \#include \char`\"{}general.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}camera.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}raytracer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sphere.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}plane.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}light.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}transform.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}noise.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}csg.\+h\char`\"{}}\\*
+Include dependency graph for main.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cc__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf do\+Redraw} ()
+\item 
+void {\bf do\+Keyboard} (int, int, int)
+\item 
+void {\bf tick} (double)
+\item 
+void $\ast$ {\bf rendering\+Thread} (void $\ast$arg)
+\item 
+void {\bf render\+Pixels} (int offset, int skip)
+\item 
+int {\bf main} (int argc, char $\ast$$\ast$args)
+\item 
+void {\bf put\+Pixel} (int x, int y, int r, int g, int b)
+\item 
+void {\bf print\+Debug\+Indentation} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf screen\+Width}
+\item 
+int {\bf screen\+Height}
+\item 
+int {\bf is\+Running}
+\item 
+double {\bf g\+Time}
+\item 
+double {\bf simulation\+Speed} =5.\+0
+\item 
+S\+D\+L\+\_\+\+Surface $\ast$ {\bf screen}
+\item 
+double {\bf camera\+Orbit} [2] =\{0.\+0,0.\+0\}
+\item 
+{\bf Raytracer} $\ast$ {\bf raytracer}
+\item 
+{\bf Transform} $\ast$ {\bf object1}
+\item 
+{\bf Transform} $\ast$ {\bf object2}
+\item 
+int {\bf debug\+Pixel\+X} =-\/1
+\begin{DoxyCompactList}\small\item\em Used for debugging, note that we drop down to singel threaded mode when we are using this per-\/pixel debugging. \end{DoxyCompactList}\item 
+int {\bf debug\+Pixel\+Y}
+\item 
+int {\bf debug\+This\+Pixel} =0
+\item 
+int {\bf debug\+Indentation} =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The main entry point and code skeleton for a raytracer. 
+
+
+
+Definition in file {\bf main.\+cc}.
+
+
+
+\subsection{Function Documentation}
+\index{main.\+cc@{main.\+cc}!do\+Keyboard@{do\+Keyboard}}
+\index{do\+Keyboard@{do\+Keyboard}!main.\+cc@{main.\+cc}}
+\subsubsection[{do\+Keyboard}]{\setlength{\rightskip}{0pt plus 5cm}void do\+Keyboard (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{int}]{mouse\+X, }
+\item[{int}]{mouse\+Y}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a83ffdf0971eda1f49c219d7410ac7d7c}
+
+
+Definition at line 213 of file main.\+cc.
+
+
+
+Referenced by main().
+
+\index{main.\+cc@{main.\+cc}!do\+Redraw@{do\+Redraw}}
+\index{do\+Redraw@{do\+Redraw}!main.\+cc@{main.\+cc}}
+\subsubsection[{do\+Redraw}]{\setlength{\rightskip}{0pt plus 5cm}void do\+Redraw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a6d740e1f37193cedeff0d6c8a0dd27c6}
+
+
+Definition at line 224 of file main.\+cc.
+
+
+
+References Raytracer\+::camera, camera\+Orbit, debug\+Pixel\+X, debug\+Pixel\+Y, debug\+This\+Pixel, Raytracer\+::get\+Camera(), g\+Time, Transform\+::identity(), M\+\_\+\+P\+I, put\+Pixel(), Raytracer\+::raytrace(), Transform\+::rotate\+X(), Transform\+::scale(), screen\+Height, screen\+Width, Camera\+::set\+Focus(), Camera\+::set\+Origin(), Camera\+::set\+Up(), Transform\+::translate(), and zero().
+
+
+
+Referenced by main().
+
+\index{main.\+cc@{main.\+cc}!main@{main}}
+\index{main@{main}!main.\+cc@{main.\+cc}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{args}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a7a29781a20c5dd4153c3c1cecf0ff328}
+
+
+Definition at line 86 of file main.\+cc.
+
+
+
+References Material\+Map\+::add(), Raytracer\+::add\+Light(), Intersection\+::add\+Object(), Raytracer\+::add\+Object(), Raytracer\+::ambient\+Light, debug\+Pixel\+X, debug\+Pixel\+Y, do\+Keyboard(), do\+Redraw(), init\+Noise(), is\+Running, Material\+Map\+::\+Noise, Raytracer\+::\+Raytracer(), raytracer, screen, screen\+Height, screen\+Width, Raytracer\+::set\+Ambient\+Light(), Raytracer\+::set\+Camera(), Object\+::set\+Material(), and tick().
+
+\index{main.\+cc@{main.\+cc}!print\+Debug\+Indentation@{print\+Debug\+Indentation}}
+\index{print\+Debug\+Indentation@{print\+Debug\+Indentation}!main.\+cc@{main.\+cc}}
+\subsubsection[{print\+Debug\+Indentation}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Debug\+Indentation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{main_8cc_ae1c327e9afb4e6ccd35029355384fe71}
+
+
+Definition at line 291 of file main.\+cc.
+
+
+
+References debug\+Indentation.
+
+
+
+Referenced by Plane\+::line\+Test(), Intersection\+::line\+Test(), and Raytracer\+::raytrace().
+
+\index{main.\+cc@{main.\+cc}!put\+Pixel@{put\+Pixel}}
+\index{put\+Pixel@{put\+Pixel}!main.\+cc@{main.\+cc}}
+\subsubsection[{put\+Pixel}]{\setlength{\rightskip}{0pt plus 5cm}void put\+Pixel (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{r, }
+\item[{int}]{g, }
+\item[{int}]{b}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a034593eaddd6436e6e2899508e8b8cfb}
+
+
+Definition at line 217 of file main.\+cc.
+
+
+
+References screen.
+
+
+
+Referenced by do\+Redraw().
+
+\index{main.\+cc@{main.\+cc}!rendering\+Thread@{rendering\+Thread}}
+\index{rendering\+Thread@{rendering\+Thread}!main.\+cc@{main.\+cc}}
+\subsubsection[{rendering\+Thread}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ rendering\+Thread (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{arg}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a3fa981641b43c5ea3379646f63cd1024}
+\index{main.\+cc@{main.\+cc}!render\+Pixels@{render\+Pixels}}
+\index{render\+Pixels@{render\+Pixels}!main.\+cc@{main.\+cc}}
+\subsubsection[{render\+Pixels}]{\setlength{\rightskip}{0pt plus 5cm}void render\+Pixels (
+\begin{DoxyParamCaption}
+\item[{int}]{offset, }
+\item[{int}]{skip}
+\end{DoxyParamCaption}
+)}\label{main_8cc_adbe019cfc489ce5e27241670354fcb63}
+\index{main.\+cc@{main.\+cc}!tick@{tick}}
+\index{tick@{tick}!main.\+cc@{main.\+cc}}
+\subsubsection[{tick}]{\setlength{\rightskip}{0pt plus 5cm}void tick (
+\begin{DoxyParamCaption}
+\item[{double}]{dt}
+\end{DoxyParamCaption}
+)}\label{main_8cc_a10b0960211ad10ce568c0afedcd72db1}
+
+
+Definition at line 292 of file main.\+cc.
+
+
+
+References camera\+Orbit, and g\+Time.
+
+
+
+Referenced by main().
+
+
+
+\subsection{Variable Documentation}
+\index{main.\+cc@{main.\+cc}!camera\+Orbit@{camera\+Orbit}}
+\index{camera\+Orbit@{camera\+Orbit}!main.\+cc@{main.\+cc}}
+\subsubsection[{camera\+Orbit}]{\setlength{\rightskip}{0pt plus 5cm}double camera\+Orbit[2] =\{0.\+0,0.\+0\}}\label{main_8cc_aa477a9cdb7108ee48e66b3587064a260}
+
+
+Definition at line 74 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), and tick().
+
+\index{main.\+cc@{main.\+cc}!debug\+Indentation@{debug\+Indentation}}
+\index{debug\+Indentation@{debug\+Indentation}!main.\+cc@{main.\+cc}}
+\subsubsection[{debug\+Indentation}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+Indentation =0}\label{main_8cc_a5906e7ce057ac03baa7e87832fcad510}
+
+
+Definition at line 84 of file main.\+cc.
+
+
+
+Referenced by Intersection\+::line\+Test(), print\+Debug\+Indentation(), and Raytracer\+::raytrace().
+
+\index{main.\+cc@{main.\+cc}!debug\+Pixel\+X@{debug\+Pixel\+X}}
+\index{debug\+Pixel\+X@{debug\+Pixel\+X}!main.\+cc@{main.\+cc}}
+\subsubsection[{debug\+Pixel\+X}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+Pixel\+X =-\/1}\label{main_8cc_a66b8012a1683432998c4d93682ed069a}
+
+
+Used for debugging, note that we drop down to singel threaded mode when we are using this per-\/pixel debugging. 
+
+Thus any threading related bugs will {\itshape N\+O\+T} be visible using this method. 
+
+Definition at line 83 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), and main().
+
+\index{main.\+cc@{main.\+cc}!debug\+Pixel\+Y@{debug\+Pixel\+Y}}
+\index{debug\+Pixel\+Y@{debug\+Pixel\+Y}!main.\+cc@{main.\+cc}}
+\subsubsection[{debug\+Pixel\+Y}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+Pixel\+Y}\label{main_8cc_ad6d404111e65b158c54e3b0fa5cc528f}
+
+
+Definition at line 83 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), and main().
+
+\index{main.\+cc@{main.\+cc}!debug\+This\+Pixel@{debug\+This\+Pixel}}
+\index{debug\+This\+Pixel@{debug\+This\+Pixel}!main.\+cc@{main.\+cc}}
+\subsubsection[{debug\+This\+Pixel}]{\setlength{\rightskip}{0pt plus 5cm}int debug\+This\+Pixel =0}\label{main_8cc_a030f3c150bfe06af45f51ded93eb4d57}
+
+
+Definition at line 83 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), Plane\+::line\+Test(), Intersection\+::line\+Test(), and Raytracer\+::raytrace().
+
+\index{main.\+cc@{main.\+cc}!g\+Time@{g\+Time}}
+\index{g\+Time@{g\+Time}!main.\+cc@{main.\+cc}}
+\subsubsection[{g\+Time}]{\setlength{\rightskip}{0pt plus 5cm}double g\+Time}\label{main_8cc_afdd1bc2e0287b11c764d4d2d05c0c7e7}
+
+
+Definition at line 71 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), and tick().
+
+\index{main.\+cc@{main.\+cc}!is\+Running@{is\+Running}}
+\index{is\+Running@{is\+Running}!main.\+cc@{main.\+cc}}
+\subsubsection[{is\+Running}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Running}\label{main_8cc_a32ba696eaeb5eef403599f4bb8b376e7}
+
+
+Definition at line 70 of file main.\+cc.
+
+
+
+Referenced by main().
+
+\index{main.\+cc@{main.\+cc}!object1@{object1}}
+\index{object1@{object1}!main.\+cc@{main.\+cc}}
+\subsubsection[{object1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Transform}$\ast$ object1}\label{main_8cc_ac53c691c7d09fea34558463b9617c400}
+
+
+Definition at line 77 of file main.\+cc.
+
+\index{main.\+cc@{main.\+cc}!object2@{object2}}
+\index{object2@{object2}!main.\+cc@{main.\+cc}}
+\subsubsection[{object2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Transform} $\ast$ object2}\label{main_8cc_abccc30eef220ab7694fa06309693cd05}
+
+
+Definition at line 77 of file main.\+cc.
+
+\index{main.\+cc@{main.\+cc}!raytracer@{raytracer}}
+\index{raytracer@{raytracer}!main.\+cc@{main.\+cc}}
+\subsubsection[{raytracer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Raytracer}$\ast$ raytracer}\label{main_8cc_abe8032d8c8b72ac9d1046e8f29acb0f1}
+
+
+Definition at line 76 of file main.\+cc.
+
+
+
+Referenced by main().
+
+\index{main.\+cc@{main.\+cc}!screen@{screen}}
+\index{screen@{screen}!main.\+cc@{main.\+cc}}
+\subsubsection[{screen}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+Surface$\ast$ screen}\label{main_8cc_a78fa3957d73de49cb81d047857504218}
+
+
+Definition at line 72 of file main.\+cc.
+
+
+
+Referenced by main(), and put\+Pixel().
+
+\index{main.\+cc@{main.\+cc}!screen\+Height@{screen\+Height}}
+\index{screen\+Height@{screen\+Height}!main.\+cc@{main.\+cc}}
+\subsubsection[{screen\+Height}]{\setlength{\rightskip}{0pt plus 5cm}int screen\+Height}\label{main_8cc_a9ebc1dbd77788c4bfa27758a6725413f}
+
+
+Definition at line 70 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), main(), and Raytracer\+::raytrace().
+
+\index{main.\+cc@{main.\+cc}!screen\+Width@{screen\+Width}}
+\index{screen\+Width@{screen\+Width}!main.\+cc@{main.\+cc}}
+\subsubsection[{screen\+Width}]{\setlength{\rightskip}{0pt plus 5cm}int screen\+Width}\label{main_8cc_ae50cb92a78d9e0a4f4bd718fc02bd294}
+
+
+Definition at line 70 of file main.\+cc.
+
+
+
+Referenced by do\+Redraw(), main(), and Raytracer\+::raytrace().
+
+\index{main.\+cc@{main.\+cc}!simulation\+Speed@{simulation\+Speed}}
+\index{simulation\+Speed@{simulation\+Speed}!main.\+cc@{main.\+cc}}
+\subsubsection[{simulation\+Speed}]{\setlength{\rightskip}{0pt plus 5cm}double simulation\+Speed =5.\+0}\label{main_8cc_a82d884a25b7f323bb18ab91363a0e8e4}
+
+
+Definition at line 71 of file main.\+cc.
+

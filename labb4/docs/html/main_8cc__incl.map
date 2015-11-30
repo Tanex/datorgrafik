@@ -1,0 +1,15 @@
+<map id="main.cc" name="main.cc">
+<area shape="rect" id="node2" href="$general_8h.html" title="Contains common type definitions, includes, etc. " alt="" coords="704,80,787,107"/>
+<area shape="rect" id="node15" href="$camera_8h.html" title="Declares all methods for the Camera class. " alt="" coords="1444,155,1527,181"/>
+<area shape="rect" id="node16" href="$raytracer_8h.html" title="Declares the main raytracing functionality for the Raytracer class. " alt="" coords="1485,80,1576,107"/>
+<area shape="rect" id="node20" href="$light_8h.html" title="Declares all methods for the Light class. " alt="" coords="1551,155,1612,181"/>
+<area shape="rect" id="node21" href="$sphere_8h.html" title="Declares all methods for the Sphere class. " alt="" coords="1681,80,1759,107"/>
+<area shape="rect" id="node22" href="$plane_8h.html" title="Declares all methods for the Plane class. " alt="" coords="1784,80,1853,107"/>
+<area shape="rect" id="node23" href="$transform_8h.html" title="Declares all methods for the Transform class. " alt="" coords="1970,80,2067,107"/>
+<area shape="rect" id="node24" href="$noise_8h.html" title="Declares functions for computing semi&#45;random noise in 2&#45;5 dimensions. " alt="" coords="1878,80,1946,107"/>
+<area shape="rect" id="node25" href="$csg_8h.html" title="Declares all methods for all CSG classes (Intersection, Inverse) " alt="" coords="1600,80,1656,107"/>
+<area shape="rect" id="node14" href="$vector_8h.html" title="Declares some miscellaneous. " alt="" coords="338,155,411,181"/>
+<area shape="rect" id="node17" href="$object_8h.html" title="Declares all generic methods for all raytracable objects. " alt="" coords="1637,155,1710,181"/>
+<area shape="rect" id="node18" href="$material_8h.html" title="Declares all methods for all materials (SimpleMaterial, CheckerboardMaterial, NoiseMaterial, MaterialMap). " alt="" coords="1627,229,1714,256"/>
+<area shape="rect" id="node19" href="$referenced_8h.html" title="Implements reference counters for all objects used by the raytracer via the ReferencedObject class..." alt="" coords="1577,304,1679,331"/>
+</map>
