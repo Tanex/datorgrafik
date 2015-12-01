@@ -161,9 +161,9 @@ void Resources::traverseAndCount(AC3DObject* node)
 		for (int i = 0; i < node->nSurfaces; i++)
 		{
 			if (node->surfaces[i].nVertices == 3)
-				sizeOfTriIndiceBuffer++;// += 3;
+				sizeOfTriIndiceBuffer++;
 			else //if (node->surfaces[i].nVertices == 4)
-				sizeOfQuadIndiceBuffer++;// += 4;
+				sizeOfQuadIndiceBuffer++;
 		}
 	}
 }
@@ -198,10 +198,21 @@ void Resources::modelLeaf(AC3DObject* obj, int* vertexBufIndex, int* triIndicesB
 
 	for (int i = 0; i < obj->nSurfaces; i++)
 	{
-		if (obj->surfaces->nVertices == 3)
-			triIndiceBuffer[(*triIndicesBufIndex)++] = (glm::ivec3)indices[i];
+		if (obj->surfaces[i].nVertices == 3)
+		{
+			triIndiceBuffer[(*triIndicesBufIndex)][0] = indices[i][0];
+			triIndiceBuffer[(*triIndicesBufIndex)][1] = indices[i][1];
+			triIndiceBuffer[(*triIndicesBufIndex)][2] = indices[i][2];
+			(*triIndicesBufIndex)++;
+		}
 		else //if (obj->surfaces->nVertices == 4)
-			quadIndiceBuffer[(*quadIndicesBufIndex)++] = indices[i];
+		{
+			quadIndiceBuffer[(*quadIndicesBufIndex)][0] = indices[i][0];
+			quadIndiceBuffer[(*quadIndicesBufIndex)][1] = indices[i][1];
+			quadIndiceBuffer[(*quadIndicesBufIndex)][2] = indices[i][2];
+			quadIndiceBuffer[(*quadIndicesBufIndex)][3] = indices[i][3];
+			(*quadIndicesBufIndex)++;
+		}
 	}
 	
 	glm::vec4* normals = new glm::vec4[obj->nVertices];
@@ -336,6 +347,8 @@ void World::modelRedrawLeafWBuf(AC3DObject* obj, Resources* r, int* verticesUsed
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getQuadIndicesBufSize(), (void*)r->quadIndiceBuffer, GL_STATIC_DRAW);
 
 	glDrawElements(GL_QUADS, 4 * r->getQuadIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
+
+
 }
 
 void World::modelRedraw(AC3DObject* node, Resources* r)
