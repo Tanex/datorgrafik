@@ -60,6 +60,7 @@
 #include "csg.h"
 
 #include "WoodMaterial.h"
+#include "Cone.h"
 
 /* Prototype declarations */
 void doRedraw();
@@ -76,7 +77,7 @@ SDL_Surface *screen;
 double cameraOrbit[2]={0.0,0.0};
 
 Raytracer *raytracer;
-Transform *object1, *object2;
+Transform *object1, *object2, *object3;
 
 /** Used for debugging, note that we drop down to singel threaded mode
     when we are using this per-pixel debugging. Thus any threading
@@ -154,6 +155,21 @@ int main(int argc,char **args) {
   intersection->addObject(plane2);
   object2 = new Transform(intersection);
   raytracer->addObject(object2);
+
+  /* A cone */
+  Cone *cone1 = new Cone();
+  cone1->setMaterial(new SimpleMaterial(&ballProps2));
+  object3 = new Transform(cone1);
+
+  double plane3Normal[3] = { 0.0, 0.0, 1.0 };
+  Plane *plane3 = new Plane(plane3Normal, 1.0);
+  plane3->setMaterial(new CheckerboardMaterial(1.0, &floorA, &floorB));
+  Intersection *intersection2 = new Intersection();
+  intersection2->addObject(cone1);
+  intersection2->addObject(plane3);
+  object3 = new Transform(intersection2);
+  raytracer->addObject(object3);
+
 
   /* This sets the ground plane to use a simple marble material */
   LightingProperties marble0 = {{0.6,0.8,0.6},{0.6,0.8,0.6},{1.0,1.0,1.0}, 10, {0.5,0.5,0.5}};

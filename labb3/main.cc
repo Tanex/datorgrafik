@@ -223,9 +223,9 @@ void Resources::modelLeaf(AC3DObject* obj)
 		glm::vec3 vertices[3];
 
 		for (int j = 0; j < 3; j++)
-			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index],
-									obj->vertices[obj->surfaces[i].vert[j].index + 1],
-									obj->vertices[obj->surfaces[i].vert[j].index + 2]);
+			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index * 4],
+									obj->vertices[obj->surfaces[i].vert[j].index * 4 + 1],
+									obj->vertices[obj->surfaces[i].vert[j].index * 4 + 2]);
 
 		glm::vec3 normal = glm::cross(glm::normalize(vertices[1] - vertices[0]), glm::normalize(vertices[2] - vertices[1]));
 
@@ -295,6 +295,9 @@ void World::modelRedrawWBuf(AC3DObject* node, Resources* r)
 	//glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*) &r->vertexBuffer[1]);
 	//glEnableVertexAttribArray(2);
 
+	//int verticesUsed = 0;
+	//modelRedrawTraverseWBuf(node, r, &verticesUsed);
+
 	//Setup attribPointers with vertexBuffer
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, nullptr);
 	glEnableVertexAttribArray(0);
@@ -302,8 +305,15 @@ void World::modelRedrawWBuf(AC3DObject* node, Resources* r)
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4) * 2, (void*)sizeof(glm::vec4));
 	glEnableVertexAttribArray(2);
 
-	int verticesUsed = 0;
-	modelRedrawTraverseWBuf(node, r, &verticesUsed);
+	//Upload triangle indices
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec3)*r->getTriIndicesBufSize(), (void*)r->triIndiceBuffer, GL_STATIC_DRAW);
+
+	glDrawElements(GL_TRIANGLES, 3 * r->getTriIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
+
+	//Upload quad indices
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getQuadIndicesBufSize(), (void*)r->quadIndiceBuffer, GL_STATIC_DRAW);
+
+	glDrawElements(GL_QUADS, 4 * r->getQuadIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
 }
 
 void World::modelRedrawTraverseWBuf(AC3DObject* node, Resources* r, int* verticesUsed)
@@ -342,18 +352,6 @@ void World::modelRedrawLeafWBuf(AC3DObject* obj, Resources* r, int* verticesUsed
 	//}
 
 	//delete indices;
-
-	//Upload triangle indices
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec3)*r->getTriIndicesBufSize(), (void*)r->triIndiceBuffer, GL_STATIC_DRAW);
-
-	glDrawElements(GL_TRIANGLES, 3 * r->getTriIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
-
-	//Upload quad indices
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::ivec4)*r->getQuadIndicesBufSize(), (void*)r->quadIndiceBuffer, GL_STATIC_DRAW);
-
-	glDrawElements(GL_QUADS, 4 * r->getQuadIndicesBufSize(), GL_UNSIGNED_INT, nullptr);
-
-
 }
 
 void World::modelRedraw(AC3DObject* node, Resources* r)
@@ -393,9 +391,9 @@ void World::modelRedrawLeaf(AC3DObject* obj)
 
 		//"stitch" together the 3 vertex values to a vec3
 		for (int j = 0; j < 3; j++)
-			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index],
-									obj->vertices[obj->surfaces[i].vert[j].index + 1],
-									obj->vertices[obj->surfaces[i].vert[j].index + 2]);
+			vertices[j] = glm::vec3(obj->vertices[obj->surfaces[i].vert[j].index * 4],
+									obj->vertices[obj->surfaces[i].vert[j].index * 4 + 1],
+									obj->vertices[obj->surfaces[i].vert[j].index * 4 + 2]);
 									
 		//Calculate new vector perpendicular to the plane made by the first three vertices
 		glm::vec3 normal = glm::cross(glm::normalize(vertices[1] - vertices[0]), glm::normalize(vertices[2] - vertices[1]));
@@ -403,6 +401,7 @@ void World::modelRedrawLeaf(AC3DObject* obj)
 		surface_normals[i].x = normal.x;
 		surface_normals[i].y = normal.y;
 		surface_normals[i].z = normal.z;
+		surface_normals[i].w = 0;
 	}
 
 	//Assign normals to vertices (hack method)
@@ -473,8 +472,8 @@ void World::doRedraw(Resources *r) {
   // modelviewatrix
   glm::mat4 modelviewMatrix =
 	  glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -2)) *
-	  glm::rotate(glm::mat4(1.0f), 1.2f, glm::vec3(0, 1, 0)) * //*(float)time
-	  glm::rotate(glm::mat4(1.0f), 0.6f, glm::vec3(0, 0, 1));
+	  glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0, 1, 0)) * //*(float)time
+	  glm::rotate(glm::mat4(1.0f), 0.4f*(float)time, glm::vec3(0, 0, 1));
 
   // light position
   const glm::vec4 light0pos = { 2, 1, 0, 1 };

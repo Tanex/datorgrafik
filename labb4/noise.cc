@@ -31,7 +31,7 @@ void initNoise() {
   int i,j;
   
   for(i=0;i<5;i++) for(j=0;j<1024;j++)
-	  randData[i][j] = (rand()<<1) & 0xffff;
+	  randData[i][j] = (rand() << 1) & 0xffff;
 }
 inline double semiRand(int x) {
   return randData[0][x&0x3ff]/32768.0 - 1.0;

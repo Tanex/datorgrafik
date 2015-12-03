@@ -40,6 +40,8 @@ class LightingProperties {
   double diffuse[3];
   double specular[3], shininess;
   double reflection[3];
+  double transparency;
+  double index_of_refracton;
 }; 
 
 /** \brief Abstract base class for all materials.

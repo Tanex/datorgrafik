@@ -181,6 +181,12 @@ void Raytracer::raytrace(double origin[3], double direction[3], double rgb[3],do
     for(i=0;i<3;i++) rgb[i] += rgbTmp[i]*properties.reflection[i];
   }
 
+  // Check for transparency
+  if (properties.transparency > 0)
+  {
+	  double rgbTrans[3];
+  }
+
   if(debugThisPixel) { 
     debugIndentation--; printDebugIndentation(); printf("<- RGB %.1f %.1f %.1f\n",rgb[0],rgb[1],rgb[2]);
   }
