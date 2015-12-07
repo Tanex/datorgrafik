@@ -126,17 +126,21 @@ int main(int argc,char **args) {
   raytracer->addObject(floor);
 
   /* This sets the ground plane to use a checkerboard material */
-  LightingProperties floorA = {{0.8,0.8,0.8},{0.8,0.8,0.8},{1.0,1.0,1.0}, 10, {0.5,0.5,0.5}};
-  LightingProperties floorB = {{0.8,0.4,0.4},{0.8,0.4,0.4},{1.0,0.5,0.5}, 10, {0.5,0.25,0.25}};
+  LightingProperties floorA = { {0.8,0.8,0.8},{0.8,0.8,0.8},{1.0,1.0,1.0}, 10, {0.5,0.5,0.5},0.0,1.0 };
+  LightingProperties floorB = {{0.8,0.4,0.4},{0.8,0.4,0.4},{1.0,0.5,0.5}, 10, {0.5,0.25,0.25}, 0.0,1.0};
   floor->setMaterial(new CheckerboardMaterial(1.0,&floorA,&floorB));
 
   /* The first sphere */
   Sphere *sphere1=new Sphere(0.5);
-  LightingProperties ballProps = {{0.8,0.8,0.4},{0.8,0.8,0.4},{2.0,2.0,1.0}, 10, {0.5, 0.5, 0.0}};
-  LightingProperties ballProps2 = {{0.8,0.8,0.8},{0.8,0.8,0.8},{2.0,2.0,2.0}, 10, {0.5, 0.5, 0.5}};
+  //LightingProperties ballProps = {{0.8,0.8,0.4},{0.8,0.8,0.4},{2.0,2.0,1.0}, 10, {0.5, 0.5, 0.0}};
+  LightingProperties ballProps = { {0.0,0.0,0.0},{0.0,0.0,0.0},{0.0,0.0,0.0},{10000}, {0.0,0.0,0.0}, 0.0,1.0 };
+  LightingProperties ballProps2 = {{0.8,0.8,0.8},{0.8,0.8,0.8},{2.0,2.0,2.0}, 10, {0.5, 0.5, 0.5}, 0.0,1.0 };
+  LightingProperties coneProps = { { 0.8,0.8,0.8 },{ 0.8,0.8,0.8 },{ 2.0,2.0,2.0 }, 10,{ 0.5, 0.5, 0.5 } , 0.0,1.0 };
+  ballProps.transparency = 1.0;
+  ballProps.index_of_refracton = 1.3;
   //LightingProperties ballProps2 = {{0.8,0.8,0.8},{0.8,0.8,0.8},{2.0,2.0,2.0}, 10, {0.0, 0.0, 0.0}};
-  //sphere1->setMaterial(new SimpleMaterial(&ballProps));
-  sphere1->setMaterial(new WoodMaterial());
+  sphere1->setMaterial(new SimpleMaterial(&ballProps));
+  //sphere1->setMaterial(new WoodMaterial());
   object1 = new Transform(sphere1);
   raytracer->addObject(object1);
 
@@ -158,7 +162,7 @@ int main(int argc,char **args) {
 
   /* A cone */
   Cone *cone1 = new Cone();
-  cone1->setMaterial(new SimpleMaterial(&ballProps2));
+  cone1->setMaterial(new SimpleMaterial(&coneProps));
   object3 = new Transform(cone1);
 
   double plane3Normal[3] = { 0.0, 0.0, 1.0 };
@@ -178,7 +182,7 @@ int main(int argc,char **args) {
   map->add(-0.1,&marble0);
   map->add(0.0,&marble1);
   map->add(0.1,&marble0);
-  floor->setMaterial(map);
+  //floor->setMaterial(map);
   
 
   /* Main event loop */
