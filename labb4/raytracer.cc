@@ -193,32 +193,42 @@ void Raytracer::raytrace(double origin[3], double direction[3], double rgb[3], d
 		double cosO1 = -dotProduct(normal, direction);
 		double cosO2;
 
+		//Assume no intersecting or stacking objects so that index of 
+		//refraction is always 1.0 outside of the object
 		n1 = cosO1 > 0.0 ? 1.0 : properties.index_of_refracton;
 		n2 = cosO1 > 0.0 ? properties.index_of_refracton : 1.0;
 
 		double rootExpr = 1.0 - pow(n1 / n2, 2.0)*(1.0 - pow(cosO1, 2.0));
+		//Check that root expression is valid i.e. non negative
 		if (rootExpr > 0.0)
 		{
 			cosO2 = sqrt(rootExpr);
+			//Make sure that it is a valid cosine value
 			if (cosO2 <= 1.0)
 			{
+				//Ray coming from outside the object
 				if (cosO1 > 0.0)
 				{
 					for (int i = 0; i < 3; i++)
 						transDir[i] = (n1 / n2)*direction[i] + ((n1 / n2)*cosO1 - cosO2)*normal[i];
 				}
+				//Ray coming from inside the object
 				else
 				{
 					for (int i = 0; i < 3; i++)
 						transDir[i] = (n2 / n1)*direction[i] - ((n2 / n1)*cosO1 + cosO2)*normal[i];
 				}
 
+				//Offset the starting point of the recursive ray to avoid "z-fighting"
 				double startPoint[3];
 				for (int i = 0; i < 3; i++)
 					startPoint[i] = point[i] + transDir[i] * 0.05;
 
+				//Recursive raytrace
 				raytrace(startPoint, transDir, rgbTrans, contribution*properties.transparency);
-				for (i = 0; i < 3; i++) rgb[i] = rgb[i] * (1.0 - properties.transparency) + rgbTrans[i];
+				//Blend colors
+				for (i = 0; i < 3; i++)
+					rgb[i] = rgb[i] * (1.0 - properties.transparency) + rgbTrans[i] * properties.transparency;
 			}
 		}
 	}

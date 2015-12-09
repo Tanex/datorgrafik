@@ -153,7 +153,7 @@ int main(int argc,char **args) {
      sphere */
   double plane2Normal[3] = { 1.0, 0.0, 0.0 };
   Plane *plane2 = new Plane(plane2Normal,0.0);
-  plane2->setMaterial(new CheckerboardMaterial(1.0,&floorA,&floorB));
+  plane2->setMaterial(new CheckerboardMaterial(1.0,&floorA, &floorB));
   Intersection *intersection = new Intersection();
   intersection->addObject(sphere2);
   intersection->addObject(plane2);
